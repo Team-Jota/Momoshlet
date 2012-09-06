@@ -22,6 +22,7 @@
 		E300EC6015F82449003CF51C /* MomoshletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E300EC5F15F82449003CF51C /* MomoshletTests.m */; };
 		E300ECB515F87D44003CF51C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E300ECB415F87D44003CF51C /* MainViewController.m */; };
 		E300ECB815F87D9D003CF51C /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E300ECB715F87D9D003CF51C /* CollectionViewController.m */; };
+		E3D0AEE815F8BC7D00691301 /* momo_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D0AEE715F8BC7D00691301 /* momo_shade.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		E300ECB415F87D44003CF51C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E300ECB615F87D9D003CF51C /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		E300ECB715F87D9D003CF51C /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		E3D0AEE715F8BC7D00691301 /* momo_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = momo_shade.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		E300EC3A15F82449003CF51C /* Momoshlet */ = {
 			isa = PBXGroup;
 			children = (
+				E3D0AEE615F8BC7D00691301 /* img */,
 				E300EC4315F82449003CF51C /* AppDelegate.h */,
 				E300EC4415F82449003CF51C /* AppDelegate.m */,
 				E300EC4615F82449003CF51C /* MainStoryboard.storyboard */,
@@ -159,6 +162,14 @@
 				E300EC5B15F82449003CF51C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E3D0AEE615F8BC7D00691301 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				E3D0AEE715F8BC7D00691301 /* momo_shade.png */,
+			);
+			path = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +245,7 @@
 			files = (
 				E300EC3F15F82449003CF51C /* InfoPlist.strings in Resources */,
 				E300EC4815F82449003CF51C /* MainStoryboard.storyboard in Resources */,
+				E3D0AEE815F8BC7D00691301 /* momo_shade.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +458,7 @@
 				E300EC6515F82449003CF51C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E300EC6615F82449003CF51C /* Build configuration list for PBXNativeTarget "MomoshletTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +467,7 @@
 				E300EC6815F82449003CF51C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
