@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController{
-    UIButton *btn;
-    
-}
+@interface MainViewController : UIViewController
 
 @end
