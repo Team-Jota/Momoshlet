@@ -14,7 +14,6 @@
 
 @implementation MainViewController
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,13 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    btn = [UIButton buttonWithType:0];
-    btn.frame = CGRectMake(0, 0, 50, 30);
-    V
-    
-    
-    
 	// Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor blackColor];
