@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E300EC3515F82449003CF51C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E300EC3415F82449003CF51C /* UIKit.framework */; };
+		E300EC3715F82449003CF51C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E300EC3615F82449003CF51C /* Foundation.framework */; };
+		E300EC3915F82449003CF51C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E300EC3815F82449003CF51C /* CoreGraphics.framework */; };
+		E300EC3F15F82449003CF51C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E300EC3D15F82449003CF51C /* InfoPlist.strings */; };
+		E300EC4115F82449003CF51C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E300EC4015F82449003CF51C /* main.m */; };
+		E300EC4515F82449003CF51C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E300EC4415F82449003CF51C /* AppDelegate.m */; };
+		E300EC4815F82449003CF51C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E300EC4615F82449003CF51C /* MainStoryboard.storyboard */; };
+		E300EC4B15F82449003CF51C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E300EC4A15F82449003CF51C /* ViewController.m */; };
+		E300EC5315F82449003CF51C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E300EC5215F82449003CF51C /* SenTestingKit.framework */; };
+		E300EC5415F82449003CF51C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E300EC3415F82449003CF51C /* UIKit.framework */; };
+		E300EC5515F82449003CF51C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E300EC3615F82449003CF51C /* Foundation.framework */; };
+		E300EC5D15F82449003CF51C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E300EC5B15F82449003CF51C /* InfoPlist.strings */; };
+		E300EC6015F82449003CF51C /* MomoshletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E300EC5F15F82449003CF51C /* MomoshletTests.m */; };
+		E300ECB515F87D44003CF51C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E300ECB415F87D44003CF51C /* MainViewController.m */; };
+		E300ECB815F87D9D003CF51C /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E300ECB715F87D9D003CF51C /* CollectionViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E300EC5615F82449003CF51C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E300EC2715F82449003CF51C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E300EC2F15F82449003CF51C;
+			remoteInfo = Momoshlet;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E300EC3015F82449003CF51C /* Momoshlet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momoshlet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E300EC3415F82449003CF51C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E300EC3615F82449003CF51C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E300EC3815F82449003CF51C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E300EC3C15F82449003CF51C /* Momoshlet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Momoshlet-Info.plist"; sourceTree = "<group>"; };
+		E300EC3E15F82449003CF51C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E300EC4015F82449003CF51C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E300EC4215F82449003CF51C /* Momoshlet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Momoshlet-Prefix.pch"; sourceTree = "<group>"; };
+		E300EC4315F82449003CF51C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E300EC4415F82449003CF51C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E300EC4715F82449003CF51C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		E300EC4915F82449003CF51C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E300EC4A15F82449003CF51C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E300EC5115F82449003CF51C /* MomoshletTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomoshletTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E300EC5215F82449003CF51C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E300EC5A15F82449003CF51C /* MomoshletTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MomoshletTests-Info.plist"; sourceTree = "<group>"; };
+		E300EC5C15F82449003CF51C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E300EC5E15F82449003CF51C /* MomoshletTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomoshletTests.h; sourceTree = "<group>"; };
+		E300EC5F15F82449003CF51C /* MomoshletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomoshletTests.m; sourceTree = "<group>"; };
+		E300ECB315F87D44003CF51C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		E300ECB415F87D44003CF51C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		E300ECB615F87D9D003CF51C /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		E300ECB715F87D9D003CF51C /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E300EC2D15F82449003CF51C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E300EC3515F82449003CF51C /* UIKit.framework in Frameworks */,
+				E300EC3715F82449003CF51C /* Foundation.framework in Frameworks */,
+				E300EC3915F82449003CF51C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E300EC4D15F82449003CF51C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E300EC5315F82449003CF51C /* SenTestingKit.framework in Frameworks */,
+				E300EC5415F82449003CF51C /* UIKit.framework in Frameworks */,
+				E300EC5515F82449003CF51C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E300EC2515F82449003CF51C = {
+			isa = PBXGroup;
+			children = (
+				E300EC3A15F82449003CF51C /* Momoshlet */,
+				E300EC5815F82449003CF51C /* MomoshletTests */,
+				E300EC3315F82449003CF51C /* Frameworks */,
+				E300EC3115F82449003CF51C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E300EC3115F82449003CF51C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E300EC3015F82449003CF51C /* Momoshlet.app */,
+				E300EC5115F82449003CF51C /* MomoshletTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E300EC3315F82449003CF51C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E300EC3415F82449003CF51C /* UIKit.framework */,
+				E300EC3615F82449003CF51C /* Foundation.framework */,
+				E300EC3815F82449003CF51C /* CoreGraphics.framework */,
+				E300EC5215F82449003CF51C /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E300EC3A15F82449003CF51C /* Momoshlet */ = {
+			isa = PBXGroup;
+			children = (
+				E300EC4315F82449003CF51C /* AppDelegate.h */,
+				E300EC4415F82449003CF51C /* AppDelegate.m */,
+				E300EC4615F82449003CF51C /* MainStoryboard.storyboard */,
+				E300EC4915F82449003CF51C /* ViewController.h */,
+				E300EC4A15F82449003CF51C /* ViewController.m */,
+				E300ECB315F87D44003CF51C /* MainViewController.h */,
+				E300ECB415F87D44003CF51C /* MainViewController.m */,
+				E300ECB615F87D9D003CF51C /* CollectionViewController.h */,
+				E300ECB715F87D9D003CF51C /* CollectionViewController.m */,
+				E300EC3B15F82449003CF51C /* Supporting Files */,
+			);
+			path = Momoshlet;
+			sourceTree = "<group>";
+		};
+		E300EC3B15F82449003CF51C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E300EC3C15F82449003CF51C /* Momoshlet-Info.plist */,
+				E300EC3D15F82449003CF51C /* InfoPlist.strings */,
+				E300EC4015F82449003CF51C /* main.m */,
+				E300EC4215F82449003CF51C /* Momoshlet-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E300EC5815F82449003CF51C /* MomoshletTests */ = {
+			isa = PBXGroup;
+			children = (
+				E300EC5E15F82449003CF51C /* MomoshletTests.h */,
+				E300EC5F15F82449003CF51C /* MomoshletTests.m */,
+				E300EC5915F82449003CF51C /* Supporting Files */,
+			);
+			path = MomoshletTests;
+			sourceTree = "<group>";
+		};
+		E300EC5915F82449003CF51C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E300EC5A15F82449003CF51C /* MomoshletTests-Info.plist */,
+				E300EC5B15F82449003CF51C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E300EC2F15F82449003CF51C /* Momoshlet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E300EC6315F82449003CF51C /* Build configuration list for PBXNativeTarget "Momoshlet" */;
+			buildPhases = (
+				E300EC2C15F82449003CF51C /* Sources */,
+				E300EC2D15F82449003CF51C /* Frameworks */,
+				E300EC2E15F82449003CF51C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Momoshlet;
+			productName = Momoshlet;
+			productReference = E300EC3015F82449003CF51C /* Momoshlet.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E300EC5015F82449003CF51C /* MomoshletTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E300EC6615F82449003CF51C /* Build configuration list for PBXNativeTarget "MomoshletTests" */;
+			buildPhases = (
+				E300EC4C15F82449003CF51C /* Sources */,
+				E300EC4D15F82449003CF51C /* Frameworks */,
+				E300EC4E15F82449003CF51C /* Resources */,
+				E300EC4F15F82449003CF51C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E300EC5715F82449003CF51C /* PBXTargetDependency */,
+			);
+			name = MomoshletTests;
+			productName = MomoshletTests;
+			productReference = E300EC5115F82449003CF51C /* MomoshletTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E300EC2715F82449003CF51C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "鈴木 大貴";
+			};
+			buildConfigurationList = E300EC2A15F82449003CF51C /* Build configuration list for PBXProject "Momoshlet" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E300EC2515F82449003CF51C;
+			productRefGroup = E300EC3115F82449003CF51C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E300EC2F15F82449003CF51C /* Momoshlet */,
+				E300EC5015F82449003CF51C /* MomoshletTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E300EC2E15F82449003CF51C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E300EC3F15F82449003CF51C /* InfoPlist.strings in Resources */,
+				E300EC4815F82449003CF51C /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E300EC4E15F82449003CF51C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E300EC5D15F82449003CF51C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E300EC4F15F82449003CF51C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E300EC2C15F82449003CF51C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E300EC4115F82449003CF51C /* main.m in Sources */,
+				E300EC4515F82449003CF51C /* AppDelegate.m in Sources */,
+				E300EC4B15F82449003CF51C /* ViewController.m in Sources */,
+				E300ECB515F87D44003CF51C /* MainViewController.m in Sources */,
+				E300ECB815F87D9D003CF51C /* CollectionViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E300EC4C15F82449003CF51C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E300EC6015F82449003CF51C /* MomoshletTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E300EC5715F82449003CF51C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E300EC2F15F82449003CF51C /* Momoshlet */;
+			targetProxy = E300EC5615F82449003CF51C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E300EC3D15F82449003CF51C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E300EC3E15F82449003CF51C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E300EC4615F82449003CF51C /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E300EC4715F82449003CF51C /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		E300EC5B15F82449003CF51C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E300EC5C15F82449003CF51C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E300EC6115F82449003CF51C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E300EC6215F82449003CF51C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E300EC6415F82449003CF51C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Momoshlet/Momoshlet-Prefix.pch";
+				INFOPLIST_FILE = "Momoshlet/Momoshlet-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E300EC6515F82449003CF51C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Momoshlet/Momoshlet-Prefix.pch";
+				INFOPLIST_FILE = "Momoshlet/Momoshlet-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E300EC6715F82449003CF51C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Momoshlet.app/Momoshlet";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Momoshlet/Momoshlet-Prefix.pch";
+				INFOPLIST_FILE = "MomoshletTests/MomoshletTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E300EC6815F82449003CF51C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Momoshlet.app/Momoshlet";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Momoshlet/Momoshlet-Prefix.pch";
+				INFOPLIST_FILE = "MomoshletTests/MomoshletTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E300EC2A15F82449003CF51C /* Build configuration list for PBXProject "Momoshlet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E300EC6115F82449003CF51C /* Debug */,
+				E300EC6215F82449003CF51C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E300EC6315F82449003CF51C /* Build configuration list for PBXNativeTarget "Momoshlet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E300EC6415F82449003CF51C /* Debug */,
+				E300EC6515F82449003CF51C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E300EC6615F82449003CF51C /* Build configuration list for PBXNativeTarget "MomoshletTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E300EC6715F82449003CF51C /* Debug */,
+				E300EC6815F82449003CF51C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E300EC2715F82449003CF51C /* Project object */;
+}
