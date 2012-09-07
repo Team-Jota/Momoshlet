@@ -25,10 +25,27 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor blackColor];
+    NSString *img;
+    
+    img = @"momo_shade.png";
+    
+    UIImage *image = [UIImage imageNamed:img];
+    for(int count=0;count<6;count++){
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
+        [btn setBackgroundImage:image forState:UIControlStateNormal];
+        if(i<3)
+            btn.center = CGPointMake(160, 120);
+        else
+            btn.center = CGPointMake(160, 120);
+            
+        [self.view addSubview:btn];
+    }
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidUnload
