@@ -10,31 +10,27 @@
 
 @implementation BreedView
 
-BreedView *bv = nil;
-id delegate;
-
-+ (id)initWithDelegate:(id)_delegate
+- (id)initWithDelegate:(id)_delegate
 {
-    if (bv == nil) {
-        bv = [[BreedView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    }
-    
-    delegate = _delegate;
-    
-    return bv;
-}
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if (self){
+        cb = [CustomButton initWithDelegate:self];
+        
+        self.backgroundColor = [UIColor brownColor];
+        
+        delegate = _delegate;
+        
+        UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
+        rmButton.backgroundColor = [UIColor redColor];
+        [self addSubview:rmButton];
     }
+        
     return self;
 }
 
 - (void)callRemoveBreedView{
-    //[delegate ]
+    [delegate removeBreedView];
 }
 
 /*
