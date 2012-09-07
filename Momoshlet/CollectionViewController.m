@@ -119,13 +119,15 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollXPoint != scrollView.contentOffset.x){
-        if (scrollXPoint+320 == scrollView.contentOffset.x) {
-            page++;
-            scrollXPoint = scrollView.contentOffset.x;
-        }
-        else if (scrollXPoint-320 == scrollView.contentOffset.x){
-            page--;
-            scrollXPoint = scrollView.contentOffset.x;
+        for (int i=1; i<=7; i++) {
+            if (scrollXPoint+320*i == scrollView.contentOffset.x) {
+                page+=i;
+                scrollXPoint = scrollView.contentOffset.x;
+            }
+            else if (scrollXPoint-320*i == scrollView.contentOffset.x){
+                page-=i;
+                scrollXPoint = scrollView.contentOffset.x;
+            }
         }
     }
     
