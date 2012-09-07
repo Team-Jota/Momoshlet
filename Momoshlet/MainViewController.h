@@ -10,7 +10,11 @@
 #import "CustomButton.h"
 #import "BreedView.h"
 
-@interface MainViewController : UIViewController{
+@interface MainViewController : UIViewController<BreedViewDelegate>{
     BreedView *breed;
+    CustomButton *cb;
 }
+
+- (void) removeBreedView;
+
 @end
