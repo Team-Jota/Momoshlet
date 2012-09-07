@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController{
-    //UIButton *btn;
+    UIButton *btn;
 }
 @end
