@@ -55,6 +55,7 @@
     cb = [CustomButton initWithDelegate:self];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    scrollView.delegate = self;
     
     int count = 1;
     UIView *scrollStage = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320*8, 480)];
@@ -92,8 +93,14 @@
     
     [scrollView addSubview:scrollStage];
     
+    pageLagel = [[UILabel alloc] initWithFrame:CGRectMake(0, 270, 320, 50)];
+    pageLagel.text = @"1/8";
+    page = 1;
+    scrollXPoint = scrollView.contentOffset.x;
+    
     [self.view addSubview:scrollView];
     
+    [self.view addSubview:pageLagel];
 }
 
 - (void)viewDidUnload
@@ -105,6 +112,32 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollXPoint != scrollView.contentOffset.x){
+        if (scrollXPoint+320 == scrollView.contentOffset.x) {
+            page++;
+            scrollXPoint = scrollView.contentOffset.x;
+        }
+        else if (scrollXPoint-320 == scrollView.contentOffset.x){
+            page--;
+            scrollXPoint = scrollView.contentOffset.x;
+        }
+    }
+    
+    if (page > 8) {
+        page = 8;
+    }
+    
+    if (page < 1) {
+        page = 1;
+    }
+    
+    [pageLagel setText:[NSString stringWithFormat:@"%d/8",page]];
 }
 
 @end
