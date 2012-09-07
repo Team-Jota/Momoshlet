@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomButton.h"
 
-@interface CollectionViewController : UIViewController
+@interface CollectionViewController : UIViewController {
+    CustomButton *cb;
+    UIView *detail;
+}
 
 @end

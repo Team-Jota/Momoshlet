@@ -23,6 +23,7 @@
 		E300ECB515F87D44003CF51C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E300ECB415F87D44003CF51C /* MainViewController.m */; };
 		E300ECB815F87D9D003CF51C /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E300ECB715F87D9D003CF51C /* CollectionViewController.m */; };
 		E3D0AEE815F8BC7D00691301 /* momo_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D0AEE715F8BC7D00691301 /* momo_shade.png */; };
+		E3D0AF0D15F9117100691301 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D0AF0C15F9117100691301 /* CustomButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		E300ECB615F87D9D003CF51C /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		E300ECB715F87D9D003CF51C /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		E3D0AEE715F8BC7D00691301 /* momo_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = momo_shade.png; sourceTree = "<group>"; };
+		E3D0AF0B15F9117100691301 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		E3D0AF0C15F9117100691301 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 				E300ECB615F87D9D003CF51C /* CollectionViewController.h */,
 				E300ECB715F87D9D003CF51C /* CollectionViewController.m */,
 				E300EC3B15F82449003CF51C /* Supporting Files */,
+				E3D0AF0B15F9117100691301 /* CustomButton.h */,
+				E3D0AF0C15F9117100691301 /* CustomButton.m */,
 			);
 			path = Momoshlet;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				E300EC4B15F82449003CF51C /* ViewController.m in Sources */,
 				E300ECB515F87D44003CF51C /* MainViewController.m in Sources */,
 				E300ECB815F87D9D003CF51C /* CollectionViewController.m in Sources */,
+				E3D0AF0D15F9117100691301 /* CustomButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

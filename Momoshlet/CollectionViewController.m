@@ -7,6 +7,7 @@
 //
 
 #import "CollectionViewController.h"
+#import "CustomButton.h"
 
 @interface CollectionViewController ()
 
@@ -23,13 +24,38 @@
     return self;
 }
 
+- (void)removeDetailView
+{
+    NSLog(@"aaaaaaaaaaa");
+    if (detail) {
+        [detail removeFromSuperview];
+    }
+}
+    
+- (void)detailView:(UIButton *)btn
+{
+    detail = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    detail.backgroundColor = [UIColor purpleColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [label setText:[NSString stringWithFormat:@"%d",btn.tag]];
+    [detail addSubview:label];
+    
+    UIButton *btn1 = [cb makeButton:CGRectMake(0, 100, 320, 50) :@selector(removeDetailView) :1000 :nil];
+    [detail addSubview:btn1];
+    
+    [self.view addSubview:detail];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    cb = [CustomButton initWithDelegate:self];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     
+    int count = 1;
     UIView *scrollStage = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320*8, 480)];
     scrollView.contentSize = scrollStage.frame.size;
     scrollView.pagingEnabled = YES;
@@ -43,15 +69,20 @@
         }
         
         for (int j=0; j<2; j++) {
-            for (int k=0; k<2 || (i==8 && j==1); k++) {
-                if (i==7 && j==1) {
+            for (int k=0; k<2; k++) {
+                if (count>30) {
                     break;
                 }
-                UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"momo_shade.png"]];
-                img.transform = CGAffineTransformMakeScale(0.5, 0.5);
-                img.center = CGPointMake(80+160*k, 120+200*j);
+                NSString *img;
+                img = @"momo_shade.png";
                 
-                [tempView addSubview:img];
+                UIButton *btn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(detailView:) :count*10 :img];
+                btn.transform = CGAffineTransformMakeScale(0.5, 0.5);
+                btn.center = CGPointMake(80+160*k, 120+200*j);
+                
+                [tempView addSubview:btn];
+                
+                count++;
             }
         }
         
