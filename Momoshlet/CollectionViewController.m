@@ -26,6 +26,8 @@
 
 - (void)removeDetailView
 {
+    NSLog(@"removeDetailVIew");
+    
     if (detail) {
         [detail removeFromSuperview];
     }
