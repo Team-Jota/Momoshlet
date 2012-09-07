@@ -33,19 +33,19 @@
     
     img = @"momo_shade.png";
     
-    UIImage *image = [UIImage imageNamed:img];
-    int count;
-    for(count=0;count<6;count++){
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
-        [btn setBackgroundImage:image forState:UIControlStateNormal];
-        if(count<3)
-            btn.center = CGPointMake(160, 120);
+    CustomButton *cb = [CustomButton initWithDelegate:self];
+    
+    for(int i=0;i<6;i++){
+        
+        UIButton *btn = [cb makeButton:CGRectMake(0, 0, 250, 200) :nil :10*(i+1) :img];
+        btn.transform = CGAffineTransformMakeScale(0.25, 0.25);
+        
+        if(i<3)
+            btn.center = CGPointMake(110*i, 120);
         else
-            btn.center = CGPointMake(160, 120);
-            
+            btn.center = CGPointMake(110*(i-3), 240);
         [self.view addSubview:btn];
     }
-    
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
@@ -59,5 +59,8 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+
+
 
 @end
