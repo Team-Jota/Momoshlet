@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomButton.h"
 
-@interface BreedView : UIView
+@protocol BreedViewDelegate;
 
-+ (id)initWithDelegate:(id)_delegate;
+@interface BreedView : UIView{
+    CustomButton *cb;
+    id<BreedViewDelegate> delegate;
+}
 
+- (id)initWithDelegate:(id)_delegate;
+
+@end
+
+@protocol BreedViewDelegate
+- (void) removeBreedView;
 @end
