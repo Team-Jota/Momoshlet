@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomButton.h"
 
 @interface MainViewController : UIViewController{
-    UIButton *btn;
 }
 @end
