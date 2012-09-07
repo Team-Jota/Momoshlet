@@ -10,4 +10,6 @@
 
 @interface BreedView : UIView
 
++ (id)initWithDelegate:(id)_delegate;
+
 @end
