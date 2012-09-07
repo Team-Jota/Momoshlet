@@ -10,6 +10,20 @@
 
 @implementation BreedView
 
+BreedView *bv = nil;
+id delegate;
+
++ (id)initWithDelegate:(id)_delegate
+{
+    if (bv == nil) {
+        bv = [[BreedView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    }
+    
+    delegate = _delegate;
+    
+    return bv;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -17,6 +31,10 @@
         // Initialization code
     }
     return self;
+}
+
+- (void)callRemoveBreedView{
+    //[delegate ]
 }
 
 /*
