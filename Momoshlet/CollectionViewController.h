@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
 
-@interface CollectionViewController : UIViewController {
+@interface CollectionViewController : UIViewController <UIScrollViewDelegate>{
     CustomButton *cb;
     UIView *detail;
+    UILabel *pageLagel;
+    int page;
+    float scrollXPoint;
 }
 
 @end
