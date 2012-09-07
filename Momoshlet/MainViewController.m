@@ -47,6 +47,7 @@
         [self.view addSubview:btn];
     }
     self.view.backgroundColor = [UIColor whiteColor];
+    
 }
 
 - (void)viewDidUnload
@@ -59,6 +60,22 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+-(void) breedView:(UIButton *)btn
+{
+    breed = [BreedView alloc];
+    [self.view addSubview:breed];
+}
+
+-(void) removeBreedView
+{
+    NSLog(@"remove BreedView");
+    if(breed){
+        [breed removeFromSuperview];
+    }
+}
+
+
 
 
 @end

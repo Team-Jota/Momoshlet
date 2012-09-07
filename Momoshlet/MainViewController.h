@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
+#import "BreedView.h"
 
 @interface MainViewController : UIViewController{
+    BreedView *breed;
 }
 @end
