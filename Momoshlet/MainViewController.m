@@ -34,10 +34,11 @@
     img = @"momo_shade.png";
     
     UIImage *image = [UIImage imageNamed:img];
-    for(int count=0;count<6;count++){
+    int count;
+    for(count=0;count<6;count++){
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
         [btn setBackgroundImage:image forState:UIControlStateNormal];
-        if(i<3)
+        if(count<3)
             btn.center = CGPointMake(160, 120);
         else
             btn.center = CGPointMake(160, 120);
