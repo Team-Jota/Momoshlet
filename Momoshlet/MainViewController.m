@@ -29,25 +29,30 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    NSString *img;
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tree.png"]];
+    imageView.frame = CGRectMake(0, 0, 320, 480);
+    [self.view addSubview:imageView];
     
-    img = @"momo_shade.png";
+    NSString *img;
+    img = @"momo1.png";
     
     cb = [CustomButton initWithDelegate:self];
     
+    CGPoint point[6] = {CGPointMake(100, 90),
+                        CGPointMake(160, 160),
+                        CGPointMake(240, 90),
+                        CGPointMake(180, 250),
+                        CGPointMake(260, 170),
+                        CGPointMake(70, 210)};
+    
     for(int i=0;i<6;i++){
-        
-        UIButton *btn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(breedView:) :10*(i+1) :img];
-        btn.transform = CGAffineTransformMakeScale(0.25, 0.25);
-        
-        if(i<3)
-            btn.center = CGPointMake(110*i, 120);
-        else
-            btn.center = CGPointMake(110*(i-3), 240);
+        UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(i+1) :img];
+        //btn.transform = CGAffineTransformMakeScale(0.10, 0.10);
+        btn.center = point[i];
         [self.view addSubview:btn];
     }
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
 }
 
 - (void)viewDidUnload
