@@ -28,7 +28,7 @@
         //ShipmentButton
         NSString *img;
         img= @"momo_shade.png";
-        UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :nil :img];
+        UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :1000 :img];
         shipmentBtn.transform = CGAffineTransformMakeScale(0.5, 0.5);
         shipmentBtn.center = CGPointMake(80, 240);
         [self addSubview:shipmentBtn];

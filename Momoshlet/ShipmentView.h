@@ -14,9 +14,14 @@
 @interface ShipmentView : UIView{
     CustomButton *cb;
     id<ShipmentViewDelegate> delegate;
+    
+    UIImageView *boxIV;
+    UILabel *displayLabel;
+    BOOL isAnimation;
 }
 
 - (id)initWithDelegate:(id)_delegate;
+- (void)animation;
 
 @end
 
