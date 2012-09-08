@@ -18,6 +18,11 @@
 
 SaveData *saveData = nil;
 
+const int nomal = 0;
+const int dry = 1;
+const int wet = 2;
+const int injury = 3;
+
 + (id)initSaveData
 {
     if (saveData == nil) {
@@ -54,6 +59,8 @@ SaveData *saveData = nil;
         for (int i=0; i<30; i++) {
             [collectionArray addObject:[NSNumber numberWithBool:NO]];
         }
+        
+        [self saveSaveData:COLLECTION];
     }
     
     if ([nud objectForKey:@"status"]!=NULL) {
@@ -61,6 +68,19 @@ SaveData *saveData = nil;
     }
     else {
         statusArray = [[NSMutableArray alloc] init];
+        
+        for (int i=0; i<6; i++) {
+            NSDictionary *dic = [[NSDictionary alloc] init];
+            [dic setValue:[NSNumber numberWithInt:nomal] forKey:@"status"];
+            [dic setValue:[NSDate date] forKey:@"created_at"];
+            [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury"];
+            [dic setValue:[NSNumber numberWithInt:5] forKey:@"moisture"];
+            [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty"];
+            
+            [statusArray addObject:dic];
+        }
+        
+        [self saveSaveData:STATUS];
     }
 }
 
