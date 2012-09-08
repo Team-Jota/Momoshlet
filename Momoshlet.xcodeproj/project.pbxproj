@@ -27,6 +27,9 @@
 		E343090C15F9ECB700458E48 /* ShipmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E343090B15F9ECB700458E48 /* ShipmentView.m */; };
 		E343091015F9ECD400458E48 /* CatchBugView.m in Sources */ = {isa = PBXBuildFile; fileRef = E343090F15F9ECD400458E48 /* CatchBugView.m */; };
 		E343091315F9ECF300458E48 /* WashletView.m in Sources */ = {isa = PBXBuildFile; fileRef = E343091215F9ECF300458E48 /* WashletView.m */; };
+		E3572FA015FB27F200AD354B /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = E3572F9F15FB27F200AD354B /* tree.png */; };
+		E3572FA315FB2FED00AD354B /* momo1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3572FA215FB2FED00AD354B /* momo1.png */; };
+		E3572FA615FB31FA00AD354B /* MomoAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3572FA515FB31FA00AD354B /* MomoAnimationView.m */; };
 		E3D0AEE815F8BC7D00691301 /* momo_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D0AEE715F8BC7D00691301 /* momo_shade.png */; };
 		E3D0AF0D15F9117100691301 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D0AF0C15F9117100691301 /* CustomButton.m */; };
 /* End PBXBuildFile section */
@@ -75,6 +78,10 @@
 		E343090F15F9ECD400458E48 /* CatchBugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchBugView.m; sourceTree = "<group>"; };
 		E343091115F9ECF300458E48 /* WashletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashletView.h; sourceTree = "<group>"; };
 		E343091215F9ECF300458E48 /* WashletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashletView.m; sourceTree = "<group>"; };
+		E3572F9F15FB27F200AD354B /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
+		E3572FA215FB2FED00AD354B /* momo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = momo1.png; sourceTree = "<group>"; };
+		E3572FA415FB31FA00AD354B /* MomoAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomoAnimationView.h; sourceTree = "<group>"; };
+		E3572FA515FB31FA00AD354B /* MomoAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomoAnimationView.m; sourceTree = "<group>"; };
 		E3D0AEE715F8BC7D00691301 /* momo_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = momo_shade.png; sourceTree = "<group>"; };
 		E3D0AF0B15F9117100691301 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		E3D0AF0C15F9117100691301 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -145,6 +152,8 @@
 				E300EC4A15F82449003CF51C /* ViewController.m */,
 				E300ECB315F87D44003CF51C /* MainViewController.h */,
 				E300ECB415F87D44003CF51C /* MainViewController.m */,
+				E3572FA415FB31FA00AD354B /* MomoAnimationView.h */,
+				E3572FA515FB31FA00AD354B /* MomoAnimationView.m */,
 				E34308FF15F9BD9700458E48 /* BreedView.h */,
 				E343090015F9BD9700458E48 /* BreedView.m */,
 				E343090A15F9ECB700458E48 /* ShipmentView.h */,
@@ -197,6 +206,8 @@
 		E3D0AEE615F8BC7D00691301 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				E3572FA215FB2FED00AD354B /* momo1.png */,
+				E3572F9F15FB27F200AD354B /* tree.png */,
 				E3D0AEE715F8BC7D00691301 /* momo_shade.png */,
 			);
 			path = img;
@@ -276,6 +287,8 @@
 				E300EC3F15F82449003CF51C /* InfoPlist.strings in Resources */,
 				E300EC4815F82449003CF51C /* MainStoryboard.storyboard in Resources */,
 				E3D0AEE815F8BC7D00691301 /* momo_shade.png in Resources */,
+				E3572FA015FB27F200AD354B /* tree.png in Resources */,
+				E3572FA315FB2FED00AD354B /* momo1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +334,7 @@
 				E343090C15F9ECB700458E48 /* ShipmentView.m in Sources */,
 				E343091015F9ECD400458E48 /* CatchBugView.m in Sources */,
 				E343091315F9ECF300458E48 /* WashletView.m in Sources */,
+				E3572FA615FB31FA00AD354B /* MomoAnimationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
