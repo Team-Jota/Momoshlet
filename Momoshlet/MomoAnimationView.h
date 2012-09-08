@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MomoAnimationView : UIView
+@interface MomoAnimationView : UIView{
+    BOOL isAnimation;
+}
+
+- (id)initWithMomoButton:(UIButton *)btn;
+- (void)statAniamtion;
+- (void)stopAniamtion;
 
 @end
