@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomButton.h"
 
-@interface ShipmentView : UIView
+@protocol ShipmentViewDelegate;
+
+@interface ShipmentView : UIView{
+    CustomButton *cb;
+    id<ShipmentViewDelegate> delegate;
+}
 
 @end
