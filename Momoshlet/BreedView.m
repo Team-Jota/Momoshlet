@@ -24,9 +24,30 @@
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
+        
+        //ShipmentButton
+        NSString *img;
+        img= @"momo_shade.png";
+        UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :nil :img];
+        shipmentBtn.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        shipmentBtn.center = CGPointMake(80, 240);
+        [self addSubview:shipmentBtn];
+        
     }
         
     return self;
+}
+
+-(void)shipmentView:(UIButton*)btn
+{
+    shipment = [[ShipmentView alloc]initWithDelegate:self];
+    [self addSubview:shipment];
+}
+
+-(void)removeShipmentView{
+    if(shipment){
+        [shipment removeFromSuperview];
+    }
 }
 
 - (void)callRemoveBreedView{

@@ -16,4 +16,10 @@
     id<ShipmentViewDelegate> delegate;
 }
 
+- (id)initWithDelegate:(id)_delegate;
+
+@end
+
+@protocol ShipmentViewDelegate
+-(void)removeShipmentView;
 @end

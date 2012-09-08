@@ -19,7 +19,9 @@
         
         delegate =_delegate;
         
-        UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
+        self.backgroundColor = [UIColor blueColor];
+        
+        UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveShipmentView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
     }
@@ -27,10 +29,9 @@
     return self;
 }
 
-
 -(void)callRemoveShipmentView
 {
-    //[delegate removeShipmentView];
+    [delegate removeShipmentView];
 }
 
 

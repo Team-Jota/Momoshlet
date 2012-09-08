@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShipmentView.h"
 #import "CustomButton.h"
 
 @protocol BreedViewDelegate;
 
-@interface BreedView : UIView{
+@interface BreedView : UIView<ShipmentViewDelegate>{
+    ShipmentView *shipment;
     CustomButton *cb;
     id<BreedViewDelegate> delegate;
 }
