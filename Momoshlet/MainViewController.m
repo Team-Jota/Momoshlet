@@ -47,9 +47,11 @@
     
     for(int i=0;i<6;i++){
         UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(i+1) :img];
-        //btn.transform = CGAffineTransformMakeScale(0.10, 0.10);
-        btn.center = point[i];
-        [self.view addSubview:btn];
+        MomoAnimationView *momoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
+        [momoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5*i];
+        momoBtn.center = point[i];
+        
+        [self.view addSubview:momoBtn];
     }
     
     self.view.backgroundColor = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
