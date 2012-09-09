@@ -15,13 +15,17 @@
     CustomButton *cb;
     id<ShipmentViewDelegate> delegate;
     
+    UIImageView *momoImg;
     UIImageView *boxIV;
     UILabel *displayLabel;
+    UIView *successView;
+    UIView *failView;
     BOOL isAnimation;
 }
 
 - (id)initWithDelegate:(id)_delegate;
 - (void)animation;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end
 
