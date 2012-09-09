@@ -29,15 +29,25 @@
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
         
+                
         //ShipmentButton
-        NSString *img;
-        img= @"momo_shade.png";
-        UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :1000 :img];
+        UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :1000 :[NSString stringWithFormat:@"momo_shade.png"]];
         shipmentBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
-        shipmentBtn.center = CGPointMake(80, 240);
+        shipmentBtn.center = CGPointMake(180, 50);
         [self addSubview:shipmentBtn];
-    }
         
+        //CatchBugButton
+        UIButton *catchBugBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :nil :2000 :[NSString stringWithFormat:@"momo_shade.png"]];
+        catchBugBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
+        catchBugBtn.center = CGPointMake(100, 50);
+        [self addSubview:catchBugBtn];
+        
+        //WashetButton
+        UIButton *washletBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :nil :3000 :[NSString stringWithFormat:@"momo_shade.png"]];
+        washletBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
+        washletBtn.center = CGPointMake(50, 240);
+        [self addSubview:washletBtn];
+    }
     return self;
 }
 
@@ -48,7 +58,7 @@
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
     else
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
-    momoIV.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    momoIV.transform = CGAffineTransformMakeScale(0.6, 0.6);
     momoIV.center = CGPointMake(200, 240);
     
     //汚さ反映
