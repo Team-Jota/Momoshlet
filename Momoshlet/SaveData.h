@@ -11,12 +11,18 @@
 @interface SaveData : NSObject {
     NSMutableArray *collectionArray;
     NSMutableArray *statusArray;
+    int money;
 }
 
 @property (readonly, retain) NSMutableArray *collectionArray;
 @property (readonly, retain) NSMutableArray *statusArray;
+@property (readonly) int money;
 
 + (id)initSaveData;
 - (void)loadSaveData;
-
+- (int)getNormal;
+- (int)getDirty;
+- (int)getWet;
+- (int)getDry;
+- (int)getInjury;
 @end
