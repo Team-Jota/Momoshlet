@@ -18,9 +18,10 @@
     ShipmentView *shipment;
     CustomButton *cb;
     id<BreedViewDelegate> delegate;
+    int index;
 }
 
-- (id)initWithDelegate:(id)_delegate;
+- (id)initWithDelegate:(id)_delegate:(int)_index;
 
 @end
 

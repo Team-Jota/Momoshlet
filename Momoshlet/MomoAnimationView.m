@@ -24,6 +24,20 @@
         scaleView.transform = CGAffineTransformMakeScale(0.25, 0.25);
         [scaleView addSubview:btn];
         
+        NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+        
+        UIImageView *bug = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bug.png"]];
+        bug.frame = CGRectMake(25, 25, 20, 20);
+        bug.userInteractionEnabled = NO;
+        [scaleView addSubview:bug];
+        
+        for (int i=1; i<=[[status objectForKey:@"dirty_level"] integerValue]; i++) {
+            UIImageView *dirty = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]]];
+            dirty.frame = btn.frame;
+            dirty.userInteractionEnabled = NO;
+            [scaleView addSubview:dirty];
+        }
+        
         [self addSubview:scaleView];
     }
     return self;

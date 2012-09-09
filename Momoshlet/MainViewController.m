@@ -34,7 +34,7 @@
     [self.view addSubview:imageView];
     
     NSString *img;
-    img = @"momo1.png";
+    img = @"momo1-2.png";
     
     cb = [CustomButton initWithDelegate:self];
     
@@ -73,7 +73,7 @@
 -(void) breedView:(UIButton *)btn
 {
     NSLog(@"fdashgkjlfhgjklfhlkjghdflk");
-    breed = [[BreedView alloc] initWithDelegate:self];
+    breed = [[BreedView alloc] initWithDelegate:self :(btn.tag/10)-1];
     [self.view addSubview:breed];
 }
 
