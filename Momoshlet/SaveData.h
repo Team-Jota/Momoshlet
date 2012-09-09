@@ -17,5 +17,6 @@
 @property (readonly, retain) NSMutableArray *statusArray;
 
 + (id)initSaveData;
+- (void)loadSaveData;
 
 @end
