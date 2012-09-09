@@ -21,7 +21,7 @@
         index = (btn.tag/10)-1;
         
         scaleView = [[UIView alloc] initWithFrame:btn.frame];
-        scaleView.transform = CGAffineTransformMakeScale(0, 0);
+        scaleView.transform = CGAffineTransformMakeScale(0.25, 0.25);
         [scaleView addSubview:btn];
         
         [self addSubview:scaleView];
@@ -95,10 +95,10 @@
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"created_at"]];
     float finishTime = [[status objectForKey:@"hours"] floatValue]*60*60;
-    float size = since / finishTime;
+    float size = (since * 0.75) / finishTime;
     
     if (size < 1.0){
-        scaleView.transform = CGAffineTransformMakeScale(size, size);
+        scaleView.transform = CGAffineTransformMakeScale(0.25 + size, 0.25 + size);
         [self performSelector:@selector(growMomo) withObject:nil afterDelay:INTERVAL];
     }
     else {
