@@ -10,7 +10,7 @@
 
 @implementation BreedView
 
-- (id)initWithDelegate:(id)_delegate
+- (id)initWithDelegate:(id)_delegate:(int)_index
 {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
 
@@ -20,6 +20,7 @@
         self.backgroundColor = [UIColor brownColor];
         
         delegate = _delegate;
+        index = _index;
         
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
