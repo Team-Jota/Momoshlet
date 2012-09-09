@@ -15,8 +15,6 @@
     self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
     saveData = [SaveData initSaveData];
     
-    [self updateStatus];
-    
     if (self){
         cb = [CustomButton initWithDelegate:self];
         
@@ -24,6 +22,8 @@
         
         delegate = _delegate;
         index = _index;
+        
+        [self updateStatus];
         
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
@@ -33,7 +33,7 @@
         NSString *img;
         img= @"momo_shade.png";
         UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :1000 :img];
-        shipmentBtn.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        shipmentBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
         shipmentBtn.center = CGPointMake(80, 240);
         [self addSubview:shipmentBtn];
     }
@@ -43,26 +43,27 @@
 
 - (void)updateStatus
 {
-    
-    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
-    //ここでステータスに合わせて素体画像を変更
-    momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
+    NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
+    if(0<[[status objectForKey:@"injury_level"]integerValue]||0<[[status objectForKey:@"dirty_level"]integerValue])
+        momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
+    else
+        momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
     momoIV.transform = CGAffineTransformMakeScale(0.5, 0.5);
     momoIV.center = CGPointMake(200, 240);
     
     //汚さ反映
-    /*
-    for(int i=0;i<=[[status objectForKey:@"dirty_level"]integerValue];i++){
-        
-    }*/
+    for(int i=0;i<[[status objectForKey:@"dirty_level"]integerValue];i++){
+        UIImageView *dirty = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:
+                                                                                         @"dirty%d.png",i+1]]];
+        [momoIV addSubview:dirty];
+    }
     //虫反映
     /*
-    for(int i=0;i<=[[status objectForKey:@"dirty_level"]integerValue];i++){
-        
+    for(int i=0;i<=[[status objectForKey:@"injury_level"]integerValue];i++){
+        UIImageView *bug = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:
+                                                                                 @"bug%d.png",i+1]]];
+        [momoIV addSubview:bug];
     }*/
-    
-    
-    
     [self addSubview:momoIV];
 }
 
