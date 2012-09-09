@@ -70,7 +70,9 @@ const int injury = 3;
         statusArray = [[NSMutableArray alloc] init];
         
         for (int i=0; i<6; i++) {
-            NSDictionary *dic = [[NSDictionary alloc] init];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:[NSNumber numberWithInt:100] forKey:@"id"];
+            [dic setValue:[NSNumber numberWithFloat:0.5] forKey:@"hours"];
             [dic setValue:[NSNumber numberWithInt:nomal] forKey:@"status"];
             [dic setValue:[NSDate date] forKey:@"created_at"];
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury"];
