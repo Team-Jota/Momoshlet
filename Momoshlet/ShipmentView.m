@@ -7,6 +7,7 @@
 //
 
 #import "ShipmentView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ShipmentView
 
@@ -26,18 +27,20 @@
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
         
+        momoImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo_shade.png"]];
+        momoImg.frame = CGRectMake(0, 0, 125, 100);
+        momoImg.center = CGPointMake(160, 100);
+        [self addSubview:momoImg];
+        
         boxIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo_shade.png"]];
         boxIV.frame = CGRectMake(0, 0, 125, 100);
         boxIV.center = CGPointMake(-100,300);
+        [self addSubview:boxIV];
         
-        CALayer *layer;
-        layer = boxIV.layer;
-        
+        //最後消す
         displayLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 270, 30)];
         displayLabel.backgroundColor = [UIColor whiteColor];
         displayLabel.text=@"coordinate";
-        
-        [self addSubview:boxIV];
         [self addSubview:displayLabel];
         
         isAnimation = YES;
@@ -47,20 +50,91 @@
     return self;
 }
 
+
 - (void)animation{
     boxIV.center = CGPointMake(-100,300);
     
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:2.0];
+    [UIView setAnimationDuration:1.0];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     [UIView setAnimationDelegate:self];
+    
     if (isAnimation == YES)
         [UIView setAnimationDidStopSelector:@selector(animation)];
-    
-    displayLabel.text = [NSString stringWithFormat:@"x:%f,y:%f",boxIV.layer];
-    
+        
     boxIV.center = CGPointMake(420,300);
     [UIView commitAnimations];
+}
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self fallAnimation];
+    CALayer *boxLayer = [boxIV.layer presentationLayer];
+    if(140<boxLayer.position.x&&boxLayer.position.x<180){
+        displayLabel.text = [NSString stringWithFormat:@"OK"];
+        NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(succeededShipmet) userInfo:nil repeats:NO];
+    }else{
+        displayLabel.text = [NSString stringWithFormat:@"OUT"];
+        NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(failedShipment) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)fallAnimation
+{
+    [UIView beginAnimations:nil context:nil];
+    {
+        momoImg.center = CGPointMake(160,100);
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.6];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        momoImg.center = CGPointMake(160,300);
+        
+    }
+    
+}
+
+- (void)succeededShipmet{
+    /*---------出荷成功処理---------*/
+    successView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    successView.backgroundColor = [UIColor whiteColor];
+     
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0,0 , 100, 50)];
+    [label setText:[NSString stringWithFormat:@"success"]];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(160,240,100, 50)];
+    btn.backgroundColor = [UIColor blackColor];
+    [btn addTarget:self action:@selector(removeSuccessView) forControlEvents:UIControlEventTouchDown];
+    
+    [successView addSubview:label];
+    [successView addSubview:btn];
+    [self addSubview:successView];
+}
+
+- (void)removeSuccessView{
+    if(successView){
+        [successView removeFromSuperview];
+    }
+}
+
+- (void)failedShipment{
+    /*---------出荷失敗処理---------*/
+    failView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    failView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0,0 , 100, 50)];
+    [label setText:[NSString stringWithFormat:@"fail"]];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(160,240,100, 50)];
+    btn.backgroundColor = [UIColor blackColor];
+    [btn addTarget:self action:@selector(removeFailView) forControlEvents:UIControlEventTouchDown];
+    [failView addSubview:label];
+    [failView addSubview:btn];
+    [self addSubview:failView];
+}
+
+- (void)removeFailView{
+    if(failView){
+        [failView removeFromSuperview];
+    }
 }
 
 
