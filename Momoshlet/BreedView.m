@@ -15,6 +15,8 @@
     self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
     saveData = [SaveData initSaveData];
     
+    [self updateStatus];
+    
     if (self){
         cb = [CustomButton initWithDelegate:self];
         
@@ -26,7 +28,7 @@
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
-                
+        
         //ShipmentButton
         NSString *img;
         img= @"momo_shade.png";
@@ -34,7 +36,6 @@
         shipmentBtn.transform = CGAffineTransformMakeScale(0.5, 0.5);
         shipmentBtn.center = CGPointMake(80, 240);
         [self addSubview:shipmentBtn];
-        
     }
         
     return self;
@@ -42,7 +43,27 @@
 
 - (void)updateStatus
 {
-    saveData.statusArray;
+    
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    //ここでステータスに合わせて素体画像を変更
+    momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
+    momoIV.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    momoIV.center = CGPointMake(200, 240);
+    
+    //汚さ反映
+    /*
+    for(int i=0;i<=[[status objectForKey:@"dirty_level"]integerValue];i++){
+        
+    }*/
+    //虫反映
+    /*
+    for(int i=0;i<=[[status objectForKey:@"dirty_level"]integerValue];i++){
+        
+    }*/
+    
+    
+    
+    [self addSubview:momoIV];
 }
 
 

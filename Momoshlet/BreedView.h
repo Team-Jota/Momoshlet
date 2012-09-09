@@ -15,6 +15,7 @@
 
 @interface BreedView : UIView<ShipmentViewDelegate>{
     SaveData *saveData;
+    UIImageView *momoIV;
     ShipmentView *shipment;
     CustomButton *cb;
     id<BreedViewDelegate> delegate;
