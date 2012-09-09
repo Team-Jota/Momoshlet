@@ -73,10 +73,9 @@
     CALayer *boxLayer = [boxIV.layer presentationLayer];
     if(140<boxLayer.position.x&&boxLayer.position.x<180){
         displayLabel.text = [NSString stringWithFormat:@"OK"];
-        NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(succeededShipmet) userInfo:nil repeats:NO];
-    }else{
+        
+        }else{
         displayLabel.text = [NSString stringWithFormat:@"OUT"];
-        NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(failedShipment) userInfo:nil repeats:NO];
     }
 }
 
@@ -89,51 +88,34 @@
         [UIView setAnimationDuration:0.6];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         momoImg.center = CGPointMake(160,300);
-        
     }
-    
 }
 
-- (void)succeededShipmet{
-    /*---------出荷成功処理---------*/
-    successView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    successView.backgroundColor = [UIColor whiteColor];
-     
+- (void)resultView:(BOOL)flag
+{
+    if(flag)
+        NSLog(@"a");
+    else
+        NSLog(@"b");
+    
+    resultView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    resultView.backgroundColor = [UIColor whiteColor];
+    
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0,0 , 100, 50)];
     [label setText:[NSString stringWithFormat:@"success"]];
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(160,240,100, 50)];
     btn.backgroundColor = [UIColor blackColor];
     [btn addTarget:self action:@selector(removeSuccessView) forControlEvents:UIControlEventTouchDown];
     
-    [successView addSubview:label];
-    [successView addSubview:btn];
-    [self addSubview:successView];
+    [resultView addSubview:label];
+    [resultView addSubview:btn];
+    [self addSubview:resultView];
 }
 
-- (void)removeSuccessView{
-    if(successView){
-        [successView removeFromSuperview];
-    }
-}
 
-- (void)failedShipment{
-    /*---------出荷失敗処理---------*/
-    failView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    failView.backgroundColor = [UIColor whiteColor];
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0,0 , 100, 50)];
-    [label setText:[NSString stringWithFormat:@"fail"]];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(160,240,100, 50)];
-    btn.backgroundColor = [UIColor blackColor];
-    [btn addTarget:self action:@selector(removeFailView) forControlEvents:UIControlEventTouchDown];
-    [failView addSubview:label];
-    [failView addSubview:btn];
-    [self addSubview:failView];
-}
-
-- (void)removeFailView{
-    if(failView){
-        [failView removeFromSuperview];
+- (void)removeResultView{
+    if(resultView){
+        [resultView removeFromSuperview];
     }
 }
 

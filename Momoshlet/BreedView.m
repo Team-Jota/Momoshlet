@@ -13,7 +13,8 @@
 - (id)initWithDelegate:(id)_delegate
 {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
-
+    saveData = [SaveData initSaveData];
+    
     if (self){
         cb = [CustomButton initWithDelegate:self];
         
@@ -24,7 +25,7 @@
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
-        
+                
         //ShipmentButton
         NSString *img;
         img= @"momo_shade.png";
@@ -38,13 +39,19 @@
     return self;
 }
 
--(void)shipmentView:(UIButton*)btn
+- (void)updateStatus
+{
+    saveData.statusArray;
+}
+
+
+- (void)shipmentView:(UIButton*)btn
 {
     shipment = [[ShipmentView alloc]initWithDelegate:self];
     [self addSubview:shipment];
 }
 
--(void)removeShipmentView{
+- (void)removeShipmentView{
     if(shipment){
         [shipment removeFromSuperview];
     }

@@ -18,8 +18,7 @@
     UIImageView *momoImg;
     UIImageView *boxIV;
     UILabel *displayLabel;
-    UIView *successView;
-    UIView *failView;
+    UIView *resultView;
     BOOL isAnimation;
 }
 
