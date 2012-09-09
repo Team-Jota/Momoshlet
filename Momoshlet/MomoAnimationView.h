@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SaveData.h"
 
 @interface MomoAnimationView : UIView{
     BOOL isAnimation;
+    SaveData *saveData;
+    UIView *scaleView;
+    int index;
+    CGSize buttonSize;
 }
 
 - (id)initWithMomoButton:(UIButton *)btn;
 - (void)statAniamtion;
 - (void)stopAniamtion;
+- (void)growMomo;
 
 @end
