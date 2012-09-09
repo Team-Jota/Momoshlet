@@ -20,9 +20,5 @@
 
 + (id)initSaveData;
 - (void)loadSaveData;
-- (int)getNormal;
-- (int)getDirty;
-- (int)getWet;
-- (int)getDry;
-- (int)getInjury;
+
 @end
