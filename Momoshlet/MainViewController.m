@@ -47,7 +47,9 @@
     
     for(int i=0;i<6;i++){
         UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(i+1) :img];
+        
         MomoAnimationView *momoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
+        [momoBtn growMomo];
         [momoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5*i];
         momoBtn.center = point[i];
         
