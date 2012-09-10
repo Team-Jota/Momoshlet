@@ -23,5 +23,7 @@
 - (void)statAniamtion;
 - (void)stopAniamtion;
 - (void)growMomo;
+- (void)setInjuryView;
+- (void)setDirtyView;
 
 @end
