@@ -33,10 +33,12 @@
     imageView.frame = CGRectMake(0, 0, 320, 480);
     [self.view addSubview:imageView];
     
-    NSString *img;
-    img = @"momo1-2.png";
+    //NSString *img;
+    //img = @"momo1-2.png";
     
     cb = [CustomButton initWithDelegate:self];
+    saveData = [SaveData initSaveData];
+    
     
     CGPoint point[6] = {CGPointMake(100, 90),
                         CGPointMake(160, 160),
@@ -46,9 +48,21 @@
                         CGPointMake(70, 210)};
     
     for(int i=0;i<6;i++){
+        NSDictionary *status = [saveData.statusArray objectAtIndex:i];
+        
+        NSString *img;
+        if ([[status objectForKey:@"injury_level"] intValue] > 0 || [[status objectForKey:@"dirty_level"] intValue] > 0) {
+            img = [NSString stringWithFormat:@"momo%d-2.png",[[status objectForKey:@"id"] intValue]/100];
+        }
+        else {
+            img = [NSString stringWithFormat:@"momo%d-1.png",[[status objectForKey:@"id"] intValue]/100];
+        }
+        
         UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(i+1) :img];
         
         MomoAnimationView *momoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
+        [momoBtn setDirtyView];
+        [momoBtn setInjuryView];
         [momoBtn growMomo];
         [momoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5*i];
         momoBtn.center = point[i];
