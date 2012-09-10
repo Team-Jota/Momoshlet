@@ -104,7 +104,6 @@ SaveData *saveData = nil;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:[NSNumber numberWithInt:100] forKey:@"id"];
     [dic setValue:[NSNumber numberWithFloat:0.5] forKey:@"hours"];
-    //[dic setValue:[NSNumber numberWithInt:[self getNormal]] forKey:@"status"];
     [dic setValue:[NSDate date] forKey:@"created_at"];
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_level"];//5段階
     [dic setValue:[NSNumber numberWithInt:5] forKey:@"moisture_level"];//10段階
