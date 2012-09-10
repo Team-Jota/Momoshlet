@@ -81,7 +81,7 @@ SaveData *saveData = nil;
         for (int i=0; i<6; i++) {
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             [dic setValue:[NSNumber numberWithInt:100] forKey:@"id"];
-            [dic setValue:[NSNumber numberWithFloat:0.5] forKey:@"hours"];
+            [dic setValue:[NSNumber numberWithFloat:0.03] forKey:@"hours"];
             [dic setValue:[NSDate date] forKey:@"created_at"];
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_level"];//5段階
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_level"];//5段階
@@ -97,7 +97,7 @@ SaveData *saveData = nil;
 
 - (void)makeNewMomo:(int)index
 {
-    [statusArray insertObject:nil atIndex:index];
+    //[statusArray insertObject:nil atIndex:index];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:[NSNumber numberWithInt:100] forKey:@"id"];
@@ -108,9 +108,54 @@ SaveData *saveData = nil;
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_resistance"];//5段階
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_resistance"];//5段階
     
-    [statusArray insertObject:dic atIndex:index];
+    //[statusArray insertObject:dic atIndex:index];
+    [statusArray replaceObjectAtIndex:index withObject:dic];
     
     [self saveSaveData:STATUS];
+}
+
+- (void)countUpInjuryLevel:(NSNumber *)number
+{
+    int index = [number intValue];
+    
+    //@synchronized(self){
+        NSMutableDictionary *dic = [statusArray objectAtIndex:index];
+        int injury_level = [[dic objectForKey:@"injury_level"] intValue];
+    
+        if (injury_level < 5){
+            injury_level++;
+    
+            [dic setValue:[NSNumber numberWithInt:injury_level] forKey:@"injury_level"];
+            [statusArray replaceObjectAtIndex:index withObject:dic];
+    
+            [self saveSaveData:STATUS];
+        }
+    
+        NSLog(@"injury_level = %d",[[[statusArray objectAtIndex:index] objectForKey:@"injury_level"] intValue]);
+    //}
+}
+
+- (void)countUpDirtyLevel:(NSNumber *)number
+{
+    int index = [number intValue];
+    
+    //@synchronized(self){
+        NSMutableDictionary *dic = [statusArray objectAtIndex:index];
+        int dirty_level = [[dic objectForKey:@"dirty_level"] intValue];
+    
+        if (dirty_level < 5){
+            dirty_level++;
+    
+            [dic setValue:[NSNumber numberWithInt:dirty_level] forKey:@"dirty_level"];
+            [statusArray replaceObjectAtIndex:index withObject:dic];
+    
+            [self saveSaveData:STATUS];
+        
+            NSLog(@"in");
+        }
+    
+        NSLog(@"dirty_level = %d",[[[statusArray objectAtIndex:index] objectForKey:@"dirty_level"] intValue]);
+    //}
 }
 
 @end
