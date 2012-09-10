@@ -16,8 +16,10 @@
     BreedView *breed;
     CustomButton *cb;
     SaveData *saveData;
+    UIView *momoView;
 }
 
 - (void) removeBreedView;
+- (void)setMomoButton;
 
 @end

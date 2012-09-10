@@ -81,14 +81,15 @@
 
 - (void)fallAnimation
 {
+    momoImg.center = CGPointMake(160,100);
+    
     [UIView beginAnimations:nil context:nil];
-    {
-        momoImg.center = CGPointMake(160,100);
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.6];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        momoImg.center = CGPointMake(160,300);
-    }
+    [UIView setAnimationDuration:0.6];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        
+    momoImg.center = CGPointMake(160,300);
+    
+    [UIView commitAnimations];
 }
 
 - (void)resultView:(BOOL)flag

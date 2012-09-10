@@ -13,17 +13,17 @@
     BOOL isAnimation;
     SaveData *saveData;
     UIView *scaleView;
-    UIView *dirtyView;
-    UIView *injuryView;
+    UIImageView *stateEffectView;
     int index;
-    CGSize buttonSize;
+    UIButton *button;
 }
 
 - (id)initWithMomoButton:(UIButton *)btn;
 - (void)statAniamtion;
 - (void)stopAniamtion;
 - (void)growMomo;
-- (void)setInjuryView;
-- (void)setDirtyView;
+- (void)setStateEffect;
+- (void)calucDirtyState;
+- (void)calucInjuryState;
 
 @end

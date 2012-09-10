@@ -36,15 +36,14 @@ id delegate;
 - (UIButton *)makeButton:(CGRect)frame:(SEL)selector:(int)tag:(NSString *)imgName
 {
     UIButton *btn = [[UIButton alloc] initWithFrame:frame];
-    [btn setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
     btn.exclusiveTouch = YES;
     btn.tag = tag;
     
     if (imgName!=nil) {
-        btn.backgroundColor = [UIColor clearColor];
+        [btn setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
     }
-    else
-        btn.backgroundColor = [UIColor blackColor];
+    
+    btn.backgroundColor = [UIColor clearColor];
     
     [btn addTarget:delegate action:selector forControlEvents:UIControlEventTouchUpInside];
     

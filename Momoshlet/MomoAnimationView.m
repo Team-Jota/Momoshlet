@@ -7,7 +7,9 @@
 //
 
 #import "MomoAnimationView.h"
-#define INTERVAL 1
+#define INTERVAL 30
+#define INJURY_INTERVAL 1
+#define DIRTY_INTERVAL 1
 
 @implementation MomoAnimationView
 
@@ -17,15 +19,14 @@
     if (self) {
         isAnimation = YES;
         saveData = [SaveData initSaveData];
-        buttonSize = btn.frame.size;
+        button = btn;
         index = (btn.tag/10)-1;
         
-        scaleView = [[UIView alloc] initWithFrame:btn.frame];
+        scaleView = [[UIView alloc] initWithFrame:button.frame];
         scaleView.transform = CGAffineTransformMakeScale(0.25, 0.25);
-        [scaleView addSubview:btn];
+        [scaleView addSubview:button];
         
-        dirtyView = nil;
-        injuryView = nil;
+        stateEffectView = nil;
         
         [self addSubview:scaleView];
     }
@@ -109,42 +110,122 @@
     }
 }
 
-- (void)setDirtyView
+- (void)setStateEffect
 {
-    if (dirtyView) {
-        [dirtyView removeFromSuperview];
-        dirtyView = nil;
+    if (stateEffectView) {
+        [stateEffectView removeFromSuperview];
+        stateEffectView = nil;
     }
     
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     
-    for (int i=1; i<=[[status objectForKey:@"dirty_level"] integerValue]; i++) {
-        UIImageView *dirty = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]]];
-        dirty.frame = self.frame;
-        dirty.userInteractionEnabled = NO;
-        [dirtyView addSubview:dirty];
+    NSString *imgName;
+    if ([[status objectForKey:@"injury_level"] intValue] > 0 || [[status objectForKey:@"dirty_level"] intValue] > 0) {
+        imgName = [NSString stringWithFormat:@"momo%d-2.png",[[status objectForKey:@"id"] intValue]/100];
+    }
+    else {
+        imgName = [NSString stringWithFormat:@"momo%d-1.png",[[status objectForKey:@"id"] intValue]/100];
     }
     
-    [scaleView addSubview:dirtyView];
-}
-
-- (void)setInjuryView
-{
-    if (injuryView) {
-        [injuryView removeFromSuperview];
-        injuryView = nil;
-    }
+    [button setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
     
-    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    UIGraphicsBeginImageContext(CGSizeMake(400, 400));
     
     for (int i=1; i<=[[status objectForKey:@"dirty_level"] intValue]; i++) {
-        UIImageView *bug = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"bug%d.png",i]]];
-        bug.frame = self.frame;
-        bug.userInteractionEnabled = NO;
-        [injuryView addSubview:bug];
+        [[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
     }
     
-    [scaleView addSubview:injuryView];
+    for (int i=1; i<=[[status objectForKey:@"injury_level"] integerValue]; i++) {
+        [[UIImage imageNamed:[NSString stringWithFormat:@"bug%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
+    }
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+
+    stateEffectView = [[UIImageView alloc] initWithImage:img];
+    stateEffectView.frame = button.frame;
+    
+    [scaleView addSubview:stateEffectView];
+}
+
+- (void)calucInjuryState
+{
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"created_at"]];
+    float finishTime = [[status objectForKey:@"hours"] floatValue]*60*60;
+    float size = (since * 0.75) / finishTime;
+    
+    double injury_l;
+    double injury_r;
+    
+    if (size < 1.0) {
+        injury_l = (double)(72 - ([[status objectForKey:@"injury_resistance"] intValue] * 12)) / 72;
+        injury_r = (double)[[status objectForKey:@"injury_resistance"] intValue] / 8;
+    }
+    else {
+        injury_l = (double)(72 - ([[status objectForKey:@"injury_resistance"] intValue] * 12)) / 72;
+        injury_r = (double)[[status objectForKey:@"injury_resistance"] intValue] / 8;
+    }
+    
+    int range = (injury_l - injury_r) * 100;
+    int random = rand()%100 + 1;
+    
+    if (range>100) {
+        range = 100;
+    }
+    
+    NSLog(@"injury: range = %d, random = %d", range, random);
+    
+    if (random <= range && [[status objectForKey:@"injury_level"] intValue] < 5) {
+        /*@autoreleasepool {
+            [NSThread detachNewThreadSelector:@selector(countUpInjuryLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
+        }*/
+        [saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
+        [self setStateEffect];
+    }
+    
+    [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*10];
+}
+
+- (void)calucDirtyState
+{
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"created_at"]];
+    float finishTime = [[status objectForKey:@"hours"] floatValue]*60*60;
+    float size = (since * 0.75) / finishTime;
+    
+    double dirty_l;
+    double dirty_r;
+    
+    if (size < 1.0) {
+        dirty_l = (double)(72 - ([[status objectForKey:@"dirty_resistance"] intValue] * 12)) / 72;
+        dirty_r = (double)[[status objectForKey:@"dirty_resistance"] intValue] / 8;
+    }
+    else {
+        dirty_l = (double)(72 - ([[status objectForKey:@"dirty_resistance"] intValue] * 12)) / 72;
+        dirty_r = (double)[[status objectForKey:@"dirty_resistance"] intValue] / 8;
+    }
+    
+    int range = (dirty_l - dirty_r) * 100;
+    int random = rand()%100 + 1;
+    
+    if (range>100) {
+        range = 100;
+    }
+    
+    NSLog(@"dirty: range = %d, random = %d\n", range, random);
+    NSLog(@"dirty_level = %d", [[status objectForKey:@"dirty_level"] intValue]);
+    
+    if (random <= range && [[status objectForKey:@"dirty_level"] intValue] < 5) {
+        /*@autoreleasepool {
+            [NSThread detachNewThreadSelector:@selector(countUpDirtyLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
+        }*/
+        [saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
+        [self setStateEffect];
+    }
+    
+    [self performSelector:@selector(calucDirtyState) withObject:nil afterDelay:DIRTY_INTERVAL*10];
 }
 
 /*
