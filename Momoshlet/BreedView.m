@@ -23,8 +23,7 @@
         delegate = _delegate;
         index = _index;
         
-        dirtyView = nil;
-        injuryView = nil;
+        effectView = nil;
         
         [self updateStatus];
         
@@ -40,7 +39,7 @@
         [self addSubview:shipmentBtn];
         
         //CatchBugButton
-        UIButton *catchBugBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :nil :2000 :[NSString stringWithFormat:@"momo_shade.png"]];
+        UIButton *catchBugBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(catchBugView:) :2000 :[NSString stringWithFormat:@"momo_shade.png"]];
         catchBugBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
         catchBugBtn.center = CGPointMake(100, 50);
         [self addSubview:catchBugBtn];
@@ -54,6 +53,7 @@
     return self;
 }
 
+
 - (void)updateStatus
 {
     NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
@@ -61,44 +61,40 @@
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
     else
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
-    momoIV.transform = CGAffineTransformMakeScale(0.6, 0.6);
-    momoIV.center = CGPointMake(200, 240);
+    momoIV.frame = CGRectMake(70,120,250,250);
     
-    [self setDirtyView];
-    [self setInjuryView];
+    [self setStateEffect];
     [self addSubview:momoIV];
 }
 
-- (void)setDirtyView
-{
-    if(dirtyView){
-        [dirtyView removeFromSuperview];
-        dirtyView = nil;
-    }
-    dirtyView = [[UIView alloc]init];
-    NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
-    for(int i=0;i<[[status objectForKey:@"dirty_level"]integerValue];i++){
-        UIImageView *dirty = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:
-                                                                                    @"dirty%d.png",i+1]]];
-        [dirtyView addSubview:dirty];
-    }
-    [momoIV addSubview:dirtyView];
-}
 
-- (void)setInjuryView
+- (void)setStateEffect
 {
-    if(injuryView){
-        [injuryView removeFromSuperview];
-        injuryView = nil;
+    if (effectView) {
+        [effectView removeFromSuperview];
+        effectView = nil;
     }
-    injuryView = [[UIView alloc]init];
+    
+    UIGraphicsBeginImageContext(CGSizeMake(400, 400));
+    
     NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
-    for(int i=0;i<[[status objectForKey:@"injury_level"]integerValue];i++){
-        UIImageView *bug = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:
-                                                                                  @"bug%d.png",i+1]]];
-        [injuryView addSubview:bug];
+    
+    for (int i=1; i<=[[status objectForKey:@"dirty_level"]integerValue]; i++) {
+        [[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
     }
-    [momoIV addSubview:injuryView];
+
+    for (int i=1; i<=[[status objectForKey:@"injury_level"]integerValue]; i++) {
+        [[UIImage imageNamed:[NSString stringWithFormat:@"bug%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
+    }
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    effectView = [[UIImageView alloc] initWithImage:img];
+    effectView.frame = CGRectMake(0, 0, 250, 250);
+    
+    [momoIV addSubview:effectView];
 }
 
 
@@ -110,7 +106,8 @@
 
 - (void)catchBugView:(UIButton*)btn
 {
-    
+    catchBug = [[CatchBugView alloc]initWithDelegate:self];
+    [self addSubview:catchBug];
 }
 
 - (void)washletView:(UIButton*)btn
@@ -119,10 +116,15 @@
 }
 
 
-
 - (void)removeShipmentView{
     if(shipment){
         [shipment removeFromSuperview];
+    }
+}
+
+- (void)removeCatchBugView{
+    if(catchBug){
+        [catchBug removeFromSuperview];
     }
 }
 

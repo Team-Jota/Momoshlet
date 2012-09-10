@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomButton.h"
 
-@interface CatchBugView : UIView
+@protocol CatchBugViewDelegate;
 
+@interface CatchBugView : UIView{
+    CustomButton *cb;
+    id<CatchBugViewDelegate> delegate;
+}
+
+-(id)initWithDelegate:(id)_delegate;
+
+@end
+
+@protocol CatchBugViewDelegate
+- (void) removeCatchBugView;
 @end

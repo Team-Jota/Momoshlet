@@ -18,8 +18,7 @@
 @interface BreedView : UIView<ShipmentViewDelegate>{
     SaveData *saveData;
     UIImageView *momoIV;
-    UIView *dirtyView;
-    UIView *injuryView;
+    UIImageView *effectView;
     ShipmentView *shipment;
     CatchBugView *catchBug;
     WashletView *washlet;
@@ -30,6 +29,7 @@
 
 - (id)initWithDelegate:(id)_delegate:(int)_index;
 - (void)updateStatus;
+- (void)setStateEffect;
 
 @end
 
