@@ -10,13 +10,24 @@
 
 @implementation WashletView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithDelegate:(id)_delegate
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
     if (self) {
-        // Initialization code
+        cb = [CustomButton initWithDelegate:self];
+        delegate = _delegate;
+        self.backgroundColor = [UIColor blackColor];
+        
+        UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveWashletView) :100 :nil];
+        rmButton.backgroundColor = [UIColor blueColor];
+        [self addSubview:rmButton];
     }
     return self;
+}
+
+- (void)callRemoveWashletView
+{
+    [delegate removeWashletView];
 }
 
 /*

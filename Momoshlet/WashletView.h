@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomButton.h"
 
-@interface WashletView : UIView
+@protocol WashletViewDelegate;
 
+@interface WashletView : UIView{
+    CustomButton *cb;
+    id<WashletViewDelegate> delegate;
+}
+
+-(id)initWithDelegate:(id)_delegate;
+
+@end
+
+@protocol WashletViewDelegate
+- (void) removeWashletView;
 @end

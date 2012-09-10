@@ -45,7 +45,7 @@
         [self addSubview:catchBugBtn];
         
         //WashetButton
-        UIButton *washletBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :nil :3000 :[NSString stringWithFormat:@"momo_shade.png"]];
+        UIButton *washletBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(washletView:) :3000 :[NSString stringWithFormat:@"momo_shade.png"]];
         washletBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
         washletBtn.center = CGPointMake(50, 240);
         [self addSubview:washletBtn];
@@ -112,7 +112,8 @@
 
 - (void)washletView:(UIButton*)btn
 {
-    
+    washlet = [[WashletView alloc]initWithDelegate:self];
+    [self addSubview:washlet];
 }
 
 
@@ -127,6 +128,13 @@
         [catchBug removeFromSuperview];
     }
 }
+
+- (void)removeWashletView{
+    if(washlet){
+        [washlet removeFromSuperview];
+    }
+}
+
 
 - (void)callRemoveBreedView{
     [delegate removeBreedView];
