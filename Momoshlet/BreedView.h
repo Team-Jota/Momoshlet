@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SaveData.h"
 #import "ShipmentView.h"
+#import "CatchBugView.h"
+#import "WashletView.h"
 #import "CustomButton.h"
 
 @protocol BreedViewDelegate;
@@ -16,7 +18,11 @@
 @interface BreedView : UIView<ShipmentViewDelegate>{
     SaveData *saveData;
     UIImageView *momoIV;
+    UIView *dirtyView;
+    UIView *injuryView;
     ShipmentView *shipment;
+    CatchBugView *catchBug;
+    WashletView *washlet;
     CustomButton *cb;
     id<BreedViewDelegate> delegate;
     int index;

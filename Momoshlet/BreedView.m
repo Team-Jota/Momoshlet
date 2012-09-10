@@ -23,6 +23,9 @@
         delegate = _delegate;
         index = _index;
         
+        dirtyView = nil;
+        injuryView = nil;
+        
         [self updateStatus];
         
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
@@ -61,20 +64,41 @@
     momoIV.transform = CGAffineTransformMakeScale(0.6, 0.6);
     momoIV.center = CGPointMake(200, 240);
     
-    //汚さ反映
+    [self setDirtyView];
+    [self setInjuryView];
+    [self addSubview:momoIV];
+}
+
+- (void)setDirtyView
+{
+    if(dirtyView){
+        [dirtyView removeFromSuperview];
+        dirtyView = nil;
+    }
+    dirtyView = [[UIView alloc]init];
+    NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
     for(int i=0;i<[[status objectForKey:@"dirty_level"]integerValue];i++){
         UIImageView *dirty = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:
-                                                                                         @"dirty%d.png",i+1]]];
-        [momoIV addSubview:dirty];
+                                                                                    @"dirty%d.png",i+1]]];
+        [dirtyView addSubview:dirty];
     }
-    //虫反映
-    /*
-    for(int i=0;i<=[[status objectForKey:@"injury_level"]integerValue];i++){
+    [momoIV addSubview:dirtyView];
+}
+
+- (void)setInjuryView
+{
+    if(injuryView){
+        [injuryView removeFromSuperview];
+        injuryView = nil;
+    }
+    injuryView = [[UIView alloc]init];
+    NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
+    for(int i=0;i<[[status objectForKey:@"injury_level"]integerValue];i++){
         UIImageView *bug = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:
-                                                                                 @"bug%d.png",i+1]]];
-        [momoIV addSubview:bug];
-    }*/
-    [self addSubview:momoIV];
+                                                                                  @"bug%d.png",i+1]]];
+        [injuryView addSubview:bug];
+    }
+    [momoIV addSubview:injuryView];
 }
 
 
@@ -83,6 +107,18 @@
     shipment = [[ShipmentView alloc]initWithDelegate:self];
     [self addSubview:shipment];
 }
+
+- (void)catchBugView:(UIButton*)btn
+{
+    
+}
+
+- (void)washletView:(UIButton*)btn
+{
+    
+}
+
+
 
 - (void)removeShipmentView{
     if(shipment){
