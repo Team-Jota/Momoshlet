@@ -15,6 +15,7 @@
 @interface MainViewController : UIViewController<BreedViewDelegate>{
     BreedView *breed;
     CustomButton *cb;
+    SaveData *saveData;
 }
 
 - (void) removeBreedView;
