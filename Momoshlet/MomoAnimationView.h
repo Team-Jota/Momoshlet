@@ -13,6 +13,8 @@
     BOOL isAnimation;
     SaveData *saveData;
     UIView *scaleView;
+    UIView *dirtyView;
+    UIView *injuryView;
     int index;
     CGSize buttonSize;
 }
