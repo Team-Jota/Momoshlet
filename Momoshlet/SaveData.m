@@ -84,10 +84,8 @@ SaveData *saveData = nil;
             [dic setValue:[NSNumber numberWithFloat:0.5] forKey:@"hours"];
             [dic setValue:[NSDate date] forKey:@"created_at"];
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_level"];//5段階
-            [dic setValue:[NSNumber numberWithInt:5] forKey:@"moisture_level"];//10段階
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_level"];//5段階
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_resistance"];//5段階
-            [dic setValue:[NSNumber numberWithInt:5] forKey:@"moisture_resistance"];//10段階
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_resistance"];//5段階
             
             [statusArray addObject:dic];
@@ -106,10 +104,8 @@ SaveData *saveData = nil;
     [dic setValue:[NSNumber numberWithFloat:0.5] forKey:@"hours"];
     [dic setValue:[NSDate date] forKey:@"created_at"];
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_level"];//5段階
-    [dic setValue:[NSNumber numberWithInt:5] forKey:@"moisture_level"];//10段階
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_level"];//5段階
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_resistance"];//5段階
-    [dic setValue:[NSNumber numberWithInt:5] forKey:@"moisture_resistance"];//10段階
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_resistance"];//5段階
     
     [statusArray insertObject:dic atIndex:index];
