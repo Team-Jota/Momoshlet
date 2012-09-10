@@ -20,5 +20,7 @@
 
 + (id)initSaveData;
 - (void)loadSaveData;
+- (void)countUpInjuryLevel:(NSNumber *)number;
+- (void)countUpDirtyLevel:(NSNumber *)number;
 
 @end
