@@ -24,19 +24,8 @@
         scaleView.transform = CGAffineTransformMakeScale(0.25, 0.25);
         [scaleView addSubview:btn];
         
-        NSDictionary *status = [saveData.statusArray objectAtIndex:index];
-        
-        UIImageView *bug = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bug.png"]];
-        bug.frame = CGRectMake(25, 25, 20, 20);
-        bug.userInteractionEnabled = NO;
-        [scaleView addSubview:bug];
-        
-        for (int i=1; i<=[[status objectForKey:@"dirty_level"] integerValue]; i++) {
-            UIImageView *dirty = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]]];
-            dirty.frame = btn.frame;
-            dirty.userInteractionEnabled = NO;
-            [scaleView addSubview:dirty];
-        }
+        dirtyView = nil;
+        injuryView = nil;
         
         [self addSubview:scaleView];
     }
@@ -118,6 +107,44 @@
     else {
         scaleView.transform = CGAffineTransformMakeScale(1.0, 1.0);
     }
+}
+
+- (void)setDirtyView
+{
+    if (dirtyView) {
+        [dirtyView removeFromSuperview];
+        dirtyView = nil;
+    }
+    
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    
+    for (int i=1; i<=[[status objectForKey:@"dirty_level"] integerValue]; i++) {
+        UIImageView *dirty = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]]];
+        dirty.frame = self.frame;
+        dirty.userInteractionEnabled = NO;
+        [dirtyView addSubview:dirty];
+    }
+    
+    [scaleView addSubview:dirtyView];
+}
+
+- (void)setInjuryView
+{
+    if (injuryView) {
+        [injuryView removeFromSuperview];
+        injuryView = nil;
+    }
+    
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    
+    for (int i=1; i<=[[status objectForKey:@"dirty_level"] intValue]; i++) {
+        UIImageView *bug = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"bug%d.png",i]]];
+        bug.frame = self.frame;
+        bug.userInteractionEnabled = NO;
+        [injuryView addSubview:bug];
+    }
+    
+    [scaleView addSubview:injuryView];
 }
 
 /*
