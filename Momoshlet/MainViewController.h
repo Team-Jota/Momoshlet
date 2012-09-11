@@ -18,10 +18,14 @@
     SaveData *saveData;
     UIView *momoView;
     UIView *fadeView;
+    UIImageView *backImg;
+    BOOL isAnimation;
+    CGPoint backImgPoint;
 }
 
 - (void) removeBreedView;
 - (void)setMomoButton;
 - (void)setBack;
+- (void)backAnimation;
 
 @end
