@@ -39,7 +39,15 @@
     
     [self setMomoButton];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
+    fadeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    fadeView.backgroundColor = [UIColor blackColor];
+    fadeView.alpha = 0;
+    fadeView.userInteractionEnabled = NO;
+    [self.view addSubview:fadeView];
+    
+    [self setBack];
+    
+    //self.view.backgroundColor = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
 }
 
 - (void)viewDidUnload
@@ -99,6 +107,32 @@
     }
     
     [self.view insertSubview:momoView atIndex:1];
+}
+
+- (void)setBack
+{
+    NSDate *now =[NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"kk"];
+    int now_h = [[formatter stringFromDate:now] intValue];
+ 
+    NSLog(@"hour = %d",now_h);
+    
+    UIColor *color;
+    if (now_h >= 7 && now_h <=16) {
+        color = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
+        fadeView.alpha = 0;
+    }
+    else if ((now_h >= 19 && now_h <=24) || (now_h >= 1 && now_h <=5)) {
+        color = [UIColor colorWithRed:0.000 green:0.000 blue:0.000 alpha:1.0];
+        fadeView.alpha = 0.5;
+    }
+    else {
+        color = [UIColor colorWithRed:0.973 green:0.690 blue:0.141 alpha:1.0];
+        fadeView.alpha = 0.3;
+    }
+    
+    self.view.backgroundColor = color;
 }
 
 
