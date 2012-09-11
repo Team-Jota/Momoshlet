@@ -39,8 +39,9 @@
     float imgRadius;
     int index;
     
-    BOOL isAnimation;
     int dirtyLevel;
+    BOOL isAnimation;
+    BOOL isFinish;
 }
 
 @property(nonatomic,retain) UIImageView *nozzleImg;
