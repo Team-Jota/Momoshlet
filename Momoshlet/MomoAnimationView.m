@@ -112,6 +112,7 @@
 
 - (void)setStateEffect
 {
+    @synchronized(self){
     if (stateEffectView) {
         [stateEffectView removeFromSuperview];
         stateEffectView = nil;
@@ -147,6 +148,7 @@
     stateEffectView.frame = button.frame;
     
     [scaleView addSubview:stateEffectView];
+    }
 }
 
 - (void)calucInjuryState
@@ -176,12 +178,12 @@
     }
     
     if (random <= range && [[status objectForKey:@"injury_level"] intValue] < 5) {
-        /*@autoreleasepool {
+        @autoreleasepool {
             [NSThread detachNewThreadSelector:@selector(countUpInjuryLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
             [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
-        }*/
-        [saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
-        [self setStateEffect];
+        }
+        //[saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
+        //[self setStateEffect];
     }
     
     [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*10];
@@ -214,12 +216,12 @@
     }
     
     if (random <= range && [[status objectForKey:@"dirty_level"] intValue] < 5) {
-        /*@autoreleasepool {
+        @autoreleasepool {
             [NSThread detachNewThreadSelector:@selector(countUpDirtyLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
             [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
-        }*/
-        [saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
-        [self setStateEffect];
+        }
+        //[saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
+        //[self setStateEffect];
     }
     
     [self performSelector:@selector(calucDirtyState) withObject:nil afterDelay:DIRTY_INTERVAL*10];
