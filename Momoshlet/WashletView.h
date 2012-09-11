@@ -9,12 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
 
+
 @protocol WashletViewDelegate;
 
-@interface WashletView : UIView{
+@interface WashletView : UIView <UIAccelerometerDelegate>{
     CustomButton *cb;
     id<WashletViewDelegate> delegate;
+    
+    UIImageView *img;
+    CGPoint delta;
+    CGPoint translation;
+    float ballRadius;
+    
+    
+    float currentSpeed;
 }
+
+@property(nonatomic,retain) UIImageView *img;
 
 -(id)initWithDelegate:(id)_delegate;
 
