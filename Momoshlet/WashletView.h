@@ -21,6 +21,9 @@
     UIImageView *momoImg;
     UIImageView *effectImg;
     UIImageView *nozzleImg;
+    
+    NSMutableArray *dirtyIVArray;
+    
     CGPoint delta;
     CGPoint translation;
     float imgRadius;
