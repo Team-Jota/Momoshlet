@@ -22,5 +22,6 @@
 - (void)loadSaveData;
 - (void)countUpInjuryLevel:(NSNumber *)number;
 - (void)countUpDirtyLevel:(NSNumber *)number;
+- (void)resetDirty:(int)_index;
 
 @end
