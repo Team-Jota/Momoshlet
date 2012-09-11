@@ -25,5 +25,6 @@
 - (void)setStateEffect;
 - (void)calucDirtyState;
 - (void)calucInjuryState;
+- (void)stopPerformSelector;
 
 @end
