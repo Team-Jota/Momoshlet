@@ -29,6 +29,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 480, 160)];
+    backImg.backgroundColor = [UIColor clearColor];
+    backImgPoint = backImg.center;
+    [self.view addSubview:backImg];
+    
+    
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tree.png"]];
     imageView.frame = CGRectMake(0, 0, 320, 480);
     [self.view addSubview:imageView];
@@ -47,6 +53,8 @@
     
     [self setBack];
     
+    isAnimation = YES;
+    [self backAnimation];
     //self.view.backgroundColor = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
 }
 
@@ -106,7 +114,7 @@
         [momoView addSubview:momoBtn];
     }
     
-    [self.view insertSubview:momoView atIndex:1];
+    [self.view insertSubview:momoView atIndex:2];
 }
 
 - (void)setBack
@@ -122,18 +130,38 @@
     if (now_h >= 7 && now_h <=16) {
         color = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
         fadeView.alpha = 0;
+        [backImg setImage:[UIImage imageNamed:@"day.png"]];
     }
     else if ((now_h >= 19 && now_h <=24) || (now_h >= 1 && now_h <=5)) {
         color = [UIColor colorWithRed:0.000 green:0.000 blue:0.000 alpha:1.0];
-        fadeView.alpha = 0.5;
+        fadeView.alpha = 0.2;
+        [backImg setImage:[UIImage imageNamed:@"night.png"]];
     }
     else {
         color = [UIColor colorWithRed:0.973 green:0.690 blue:0.141 alpha:1.0];
-        fadeView.alpha = 0.3;
+        fadeView.alpha = 0.1;
+        [backImg setImage:[UIImage imageNamed:@"night.png"]];
     }
     
     self.view.backgroundColor = color;
+    
+    [self performSelector:@selector(setBack) withObject:nil afterDelay:60*60];
 }
 
+- (void)backAnimation
+{
+    backImg.center = backImgPoint;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDuration:30.0];
+    [UIView setAnimationsEnabled:isAnimation];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(backAnimation)];
+    
+    backImg.center = CGPointMake(backImgPoint.x - 160, backImgPoint.y);
+    
+    [UIView commitAnimations];
+}
 
 @end
