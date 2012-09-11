@@ -34,5 +34,6 @@
 @end
 
 @protocol BreedViewDelegate
-- (void) removeBreedView;
+- (void)removeBreedView;
+- (void)resetMomoButton:(int)index;
 @end
