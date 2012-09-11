@@ -17,9 +17,11 @@
     CustomButton *cb;
     SaveData *saveData;
     UIView *momoView;
+    UIView *fadeView;
 }
 
 - (void) removeBreedView;
 - (void)setMomoButton;
+- (void)setBack;
 
 @end
