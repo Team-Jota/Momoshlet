@@ -7,7 +7,7 @@
 //
 
 #import "MomoAnimationView.h"
-#define INTERVAL 30
+#define INTERVAL 10
 #define INJURY_INTERVAL 1
 #define DIRTY_INTERVAL 1
 
@@ -101,7 +101,7 @@
     float finishTime = [[status objectForKey:@"hours"] floatValue]*60*60;
     float size = (since * 0.75) / finishTime;
     
-    if (size < 1.0){
+    if (size < 0.75){
         scaleView.transform = CGAffineTransformMakeScale(0.25 + size, 0.25 + size);
         [self performSelector:@selector(growMomo) withObject:nil afterDelay:INTERVAL];
     }
@@ -175,14 +175,13 @@
         range = 100;
     }
     
-    NSLog(@"injury: range = %d, random = %d", range, random);
-    
     if (random <= range && [[status objectForKey:@"injury_level"] intValue] < 5) {
-        /*@autoreleasepool {
+        @autoreleasepool {
             [NSThread detachNewThreadSelector:@selector(countUpInjuryLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
-        }*/
-        [saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
-        [self setStateEffect];
+            [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
+        }
+        //[saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
+        //[self setStateEffect];
     }
     
     [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*10];
@@ -214,15 +213,13 @@
         range = 100;
     }
     
-    NSLog(@"dirty: range = %d, random = %d\n", range, random);
-    NSLog(@"dirty_level = %d", [[status objectForKey:@"dirty_level"] intValue]);
-    
     if (random <= range && [[status objectForKey:@"dirty_level"] intValue] < 5) {
-        /*@autoreleasepool {
+        @autoreleasepool {
             [NSThread detachNewThreadSelector:@selector(countUpDirtyLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
-        }*/
-        [saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
-        [self setStateEffect];
+            [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
+        }
+        //[saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
+        //[self setStateEffect];
     }
     
     [self performSelector:@selector(calucDirtyState) withObject:nil afterDelay:DIRTY_INTERVAL*10];
