@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    UITabBarItem *main;
+    UITabBarItem *collection;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+
+- (void)setTabBarItemMain:(UITabBarItem *)item;
+- (void)setTabBarItemCollection:(UITabBarItem *)item;
+- (void)tabBatItemMainEnabled:(BOOL)enabled;
+- (void)tabBatItemCollectionEnabled:(BOOL)enabled;
 
 @end
