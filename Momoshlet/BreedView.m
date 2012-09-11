@@ -7,6 +7,7 @@
 //
 
 #import "BreedView.h"
+#import "AppDelegate.h"
 
 @implementation BreedView
 
@@ -50,6 +51,10 @@
         washletBtn.center = CGPointMake(50, 240);
         [self addSubview:washletBtn];
     }
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app tabBatItemCollectionEnabled:NO];
+    
     return self;
 }
 
