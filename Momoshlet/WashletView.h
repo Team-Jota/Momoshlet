@@ -7,27 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SaveData.h"
 #import "CustomButton.h"
 
 
 @protocol WashletViewDelegate;
 
 @interface WashletView : UIView <UIAccelerometerDelegate>{
+    SaveData *saveData;
     CustomButton *cb;
     id<WashletViewDelegate> delegate;
     
+    UIImageView *momoImg;
+    UIImageView *effectImg;
     UIImageView *nozzleImg;
     CGPoint delta;
     CGPoint translation;
     float imgRadius;
-    
-    
-    float currentSpeed;
+    int index;
 }
 
 @property(nonatomic,retain) UIImageView *nozzleImg;
 
--(id)initWithDelegate:(id)_delegate;
+-(id)initWithDelegate:(id)_delegate:(int)_index;
 
 @end
 

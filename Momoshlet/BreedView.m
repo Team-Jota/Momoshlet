@@ -31,7 +31,7 @@
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
         
-                
+        //TODO 修正する
         //ShipmentButton
         UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :1000 :[NSString stringWithFormat:@"momo_shade.png"]];
         shipmentBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
@@ -56,6 +56,11 @@
 
 - (void)updateStatus
 {
+    if(momoIV){
+        [momoIV removeFromSuperview];
+        momoIV = nil;
+    }
+    
     NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
     if(0<[[status objectForKey:@"injury_level"]integerValue]||0<[[status objectForKey:@"dirty_level"]integerValue])
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
@@ -77,7 +82,7 @@
     
     UIGraphicsBeginImageContext(CGSizeMake(400, 400));
     
-    NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     
     for (int i=1; i<=[[status objectForKey:@"dirty_level"]integerValue]; i++) {
         [[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
@@ -112,7 +117,7 @@
 
 - (void)washletView:(UIButton*)btn
 {
-    washlet = [[WashletView alloc]initWithDelegate:self];
+    washlet = [[WashletView alloc]initWithDelegate:self:index];
     [self addSubview:washlet];
 }
 
@@ -131,6 +136,7 @@
 
 - (void)removeWashletView{
     if(washlet){
+        [self updateStatus];
         [washlet removeFromSuperview];
     }
 }
