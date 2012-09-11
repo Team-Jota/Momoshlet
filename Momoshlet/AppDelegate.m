@@ -43,4 +43,24 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)setTabBarItemMain:(UITabBarItem *)item
+{
+    main = item;
+}
+
+- (void)setTabBarItemCollection:(UITabBarItem *)item
+{
+    collection = item;
+}
+
+- (void)tabBatItemMainEnabled:(BOOL)enabled
+{
+    main.enabled = enabled;
+}
+
+- (void)tabBatItemCollectionEnabled:(BOOL)enabled
+{
+    collection.enabled = enabled;
+}
+
 @end
