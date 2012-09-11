@@ -99,12 +99,18 @@ SaveData *saveData = nil;
 {
     //[statusArray insertObject:nil atIndex:index];
     
+    int random1 = rand()%5 + 1;
+    int random2 = rand()%10;
+    
+    int number = 100;
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setValue:[NSNumber numberWithInt:100] forKey:@"id"];
+    [dic setValue:[NSNumber numberWithInt:100*number] forKey:@"id"];
     [dic setValue:[NSNumber numberWithFloat:0.5] forKey:@"hours"];
     [dic setValue:[NSDate date] forKey:@"created_at"];
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_level"];//5段階
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_level"];//5段階
+    
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_resistance"];//5段階
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_resistance"];//5段階
     
@@ -118,7 +124,7 @@ SaveData *saveData = nil;
 {
     int index = [number intValue];
     
-    //@synchronized(self){
+    @synchronized(self){
         NSMutableDictionary *dic = [statusArray objectAtIndex:index];
         int injury_level = [[dic objectForKey:@"injury_level"] intValue];
     
@@ -131,15 +137,15 @@ SaveData *saveData = nil;
             [self saveSaveData:STATUS];
         }
     
-        NSLog(@"injury_level = %d",[[[statusArray objectAtIndex:index] objectForKey:@"injury_level"] intValue]);
-    //}
+        NSLog(@"index = %d, injury_level = %d",index, [[[statusArray objectAtIndex:index] objectForKey:@"injury_level"] intValue]);
+    }
 }
 
 - (void)countUpDirtyLevel:(NSNumber *)number
 {
     int index = [number intValue];
     
-    //@synchronized(self){
+    @synchronized(self){
         NSMutableDictionary *dic = [statusArray objectAtIndex:index];
         int dirty_level = [[dic objectForKey:@"dirty_level"] intValue];
     
@@ -150,12 +156,10 @@ SaveData *saveData = nil;
             [statusArray replaceObjectAtIndex:index withObject:dic];
     
             [self saveSaveData:STATUS];
-        
-            NSLog(@"in");
         }
     
-        NSLog(@"dirty_level = %d",[[[statusArray objectAtIndex:index] objectForKey:@"dirty_level"] intValue]);
-    //}
+        NSLog(@"index = %d, dirty_level = %d",index ,[[[statusArray objectAtIndex:index] objectForKey:@"dirty_level"] intValue]);
+    }
 }
 
 @end
