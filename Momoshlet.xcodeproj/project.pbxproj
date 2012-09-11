@@ -44,6 +44,8 @@
 		E3869B8E15FED28500EBB8F1 /* night.png in Resources */ = {isa = PBXBuildFile; fileRef = E3869B8D15FED28500EBB8F1 /* night.png */; };
 		E3869B9115FEDA5100EBB8F1 /* day.png in Resources */ = {isa = PBXBuildFile; fileRef = E3869B9015FEDA5100EBB8F1 /* day.png */; };
 		E3869B9C15FF0CD600EBB8F1 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3869B9B15FF0CD600EBB8F1 /* TabBarController.m */; };
+		E3869BA715FF423B00EBB8F1 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = E3869BA615FF423B00EBB8F1 /* water.png */; };
+		E3869BAA15FF561A00EBB8F1 /* momo1-3.png in Resources */ = {isa = PBXBuildFile; fileRef = E3869BA915FF561A00EBB8F1 /* momo1-3.png */; };
 		E3D0AEE815F8BC7D00691301 /* momo_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D0AEE715F8BC7D00691301 /* momo_shade.png */; };
 		E3D0AF0D15F9117100691301 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D0AF0C15F9117100691301 /* CustomButton.m */; };
 /* End PBXBuildFile section */
@@ -111,6 +113,8 @@
 		E3869B9015FEDA5100EBB8F1 /* day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day.png; sourceTree = "<group>"; };
 		E3869B9A15FF0CD600EBB8F1 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		E3869B9B15FF0CD600EBB8F1 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		E3869BA615FF423B00EBB8F1 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
+		E3869BA915FF561A00EBB8F1 /* momo1-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "momo1-3.png"; sourceTree = "<group>"; };
 		E3D0AEE715F8BC7D00691301 /* momo_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = momo_shade.png; sourceTree = "<group>"; };
 		E3D0AF0B15F9117100691301 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		E3D0AF0C15F9117100691301 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				E3869B4515FDB1CD00EBB8F1 /* dirty5.png */,
 				E3869B4615FDB1CD00EBB8F1 /* momo1-1.png */,
 				E3869B4715FDB1CD00EBB8F1 /* momo1-2.png */,
+				E3869BA915FF561A00EBB8F1 /* momo1-3.png */,
 			);
 			path = breed;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				E3869B3B15FDB1CD00EBB8F1 /* breed */,
 				E3572F9F15FB27F200AD354B /* tree.png */,
 				E3869B9015FEDA5100EBB8F1 /* day.png */,
+				E3869BA615FF423B00EBB8F1 /* water.png */,
 				E3869B8D15FED28500EBB8F1 /* night.png */,
 				E3D0AEE715F8BC7D00691301 /* momo_shade.png */,
 			);
@@ -354,6 +360,8 @@
 				E3869B5315FDB1CD00EBB8F1 /* momo1-2.png in Resources */,
 				E3869B8E15FED28500EBB8F1 /* night.png in Resources */,
 				E3869B9115FEDA5100EBB8F1 /* day.png in Resources */,
+				E3869BA715FF423B00EBB8F1 /* water.png in Resources */,
+				E3869BAA15FF561A00EBB8F1 /* momo1-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
