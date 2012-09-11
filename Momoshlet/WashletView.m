@@ -28,6 +28,8 @@
         dirtyLevel = [[status objectForKey:@"dirty_level"]intValue];
         index = _index;
         
+        isFinish = NO;
+        
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveWashletView) :100 :nil];
         rmButton.backgroundColor = [UIColor blueColor];
         [self addSubview:rmButton];
@@ -43,6 +45,7 @@
         
         momoHitImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-3.png"]];
         momoHitImg.frame = CGRectMake(0, 0, 250, 250);
+        momoHitImg.hidden = YES;
         [momoView addSubview:momoHitImg];
         
         moveView = [[UIView alloc] initWithFrame:CGRectMake(110,350, 100, 100)];
@@ -226,29 +229,36 @@
     NSLog(@"1 = %f, 2 = %f, 3 = %f, 4 = %f, 5 = %f"
           ,dirty1.alpha,dirty2.alpha,dirty3.alpha,dirty4.alpha,dirty5.alpha);
     
-    if (dirtyLevel==1) {
-        if (dirty1.alpha<0) {
-            [self callRemoveWashletView];
+    if (isFinish==NO) {
+        if (dirtyLevel==1) {
+            if (dirty1.alpha<0) {
+                isFinish = YES;
+                [self callRemoveWashletView];
+            }
         }
-    }
-    else if (dirtyLevel==2) {
-        if (dirty1.alpha<0 && dirty2.alpha<0) {
-            [self callRemoveWashletView];
+        else if (dirtyLevel==2) {
+            if (dirty1.alpha<0 && dirty2.alpha<0) {
+                isFinish = YES;
+                [self callRemoveWashletView];
+            }
         }
-    }
-    else if (dirtyLevel==3) {
-        if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0) {
-            [self callRemoveWashletView];
+        else if (dirtyLevel==3) {
+            if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0) {
+                isFinish = YES;
+                [self callRemoveWashletView];
+            }
         }
-    }
-    else if (dirtyLevel==4) {
-        if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0 && dirty4.alpha<0) {
-            [self callRemoveWashletView];
+        else if (dirtyLevel==4) {
+            if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0 && dirty4.alpha<0) {
+                isFinish = YES;
+                [self callRemoveWashletView];
+            }
         }
-    }
-    else if (dirtyLevel==5) {
-        if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0 && dirty4.alpha<0 && dirty5.alpha<0) {
-            [self callRemoveWashletView];
+        else if (dirtyLevel==5) {
+            if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0 && dirty4.alpha<0 && dirty5.alpha<0) {
+                isFinish = YES;
+                [self callRemoveWashletView];
+            }
         }
     }
 }
@@ -259,10 +269,12 @@
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     [UIView setAnimationDelay:0.01];
     [UIView setAnimationDuration:0.5];
-    [UIView setAnimationsEnabled:isAnimation];
+    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(waterAnimation)];
-    
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(waterAnimation)];
+    }
+        
     waterView.center = CGPointMake(waterView.center.x, waterView.center.y+25);
     
     [UIView commitAnimations];
@@ -274,10 +286,12 @@
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     [UIView setAnimationDelay:0.01];
     [UIView setAnimationDuration:0.5];
-    [UIView setAnimationsEnabled:isAnimation];
+    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(waterAnimation2)];
-    
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(waterAnimation2)];
+    }
+        
     waterView.center = CGPointMake(waterView.center.x, waterView.center.y-25);
     
     
@@ -286,6 +300,8 @@
 
 - (void)callRemoveWashletView
 {
+    isAnimation = NO;
+    [saveData resetDirty:index];
     [[UIAccelerometer sharedAccelerometer]setDelegate:nil];
     [delegate removeWashletView];
 }
