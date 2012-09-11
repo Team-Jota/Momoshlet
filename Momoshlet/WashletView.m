@@ -33,17 +33,8 @@
         momoImg.frame = CGRectMake(35, 30, 250, 250);
         [self addSubview:momoImg];
         
-        NSDictionary *status = [saveData.statusArray objectAtIndex:index];
-        UIGraphicsBeginImageContext(CGSizeMake(400, 400));
-        for (int i=1; i<=[[status objectForKey:@"dirty_level"]integerValue]; i++) {
-            [[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
-        }
-        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        effectImg = [[UIImageView alloc]initWithImage:img];
-        effectImg.frame = CGRectMake(0,0,250,250);
-        
-        [momoImg addSubview:effectImg];
+        //汚れの反映
+        [self setStateEffect];
         
         //ノズル
         nozzleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
@@ -61,27 +52,45 @@
 }
 
 
-- (void)judge:(float)imgCenter{
-    
+- (void)setStateEffect
+{
+    //汚れUIImageViewの保管
+    effectImg = [[UIImageView alloc]init];
+    dirtyIVArray = [NSMutableArray array];
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    for (int i=1; i<=[[status objectForKey:@"dirty_level"]integerValue]; i++) {
+        UIImageView *imgViewTmp = [[UIImageView alloc]initWithImage:
+                                   [UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]]];
+        imgViewTmp.frame = CGRectMake(0, 0, 250, 250);
+        [dirtyIVArray insertObject:imgViewTmp atIndex:i-1];
+        [effectImg addSubview:[dirtyIVArray objectAtIndex:i-1]];
+    }
+    effectImg.frame = CGRectMake(0,0,250,250);
+    [momoImg addSubview:effectImg];
 }
 
+/*
+- (void)washMomo
+{
+    for(int i=0;i<dirtyIVArray.count;i++){
+        if((dirtyIVArray[i].center.x-50<translation.x)&&(translation.x<dirtyIVArray[i].center.x+50)){
+        }
+    }
+}*/
+
+
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration{
-        
-    //NSLog(@"x = %f", translation.x);
-    //NSLog(@"acceleration.x = %f", acceleration.x);
     
     //delta.x = 30 * acceleration.x;
         
-    if ((translation.x==320-imgRadius||translation.x==imgRadius)&&delta.x!=0){
+    if ((translation.x==320-imgRadius||translation.x==imgRadius)&&delta.x!=0)
         delta.x = 0;
-        //NSLog(@"Reset");
-    }else if((-30<=delta.x)&(delta.x<=30)){
+    else if((-30<=delta.x)&(delta.x<=30))
         delta.x += acceleration.x*2;
-    }else if(delta.x<-30){
+    else if(delta.x<-30)
         delta.x = -30;
-    }else{
+    else
         delta.x = 30;
-    }
     
     translation.x = translation.x + delta.x;
     if (translation.x + imgRadius > 320) {
@@ -96,7 +105,6 @@
     nozzleImg.center = CGPointMake(translation.x , translation.y);
     //translation.x = translation.x + delta.x;
     //[UIView commitAnimations];
-    
 }
 
 - (void)callRemoveWashletView
