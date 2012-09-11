@@ -30,6 +30,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    point[0] = CGPointMake(100, 90);
+    point[1] = CGPointMake(160, 160);
+    point[2] = CGPointMake(240, 90);
+    point[3] = CGPointMake(180, 250);
+    point[4] = CGPointMake(260, 170);
+    point[5] = CGPointMake(70, 210);
+    
     backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 480, 160)];
     backImg.backgroundColor = [UIColor clearColor];
     backImgPoint = backImg.center;
@@ -92,20 +99,15 @@
 
 - (void)setMomoButton
 {
-    if (momoView) {
+    /*if (momoView) {
         [momoView removeFromSuperview];
         momoView = nil;
-    }
+    }*/
     
     momoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     momoView.backgroundColor = [UIColor clearColor];
     
-    CGPoint point[6] = {CGPointMake(100, 90),
-        CGPointMake(160, 160),
-        CGPointMake(240, 90),
-        CGPointMake(180, 250),
-        CGPointMake(260, 170),
-        CGPointMake(70, 210)};
+    cb = [CustomButton initWithDelegate:self];
     
     for(int i=0;i<6;i++){        
         UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(i+1) :nil];
@@ -122,6 +124,29 @@
     }
     
     [self.view insertSubview:momoView atIndex:2];
+}
+
+- (void)resetMomoButton:(int)index
+{
+    NSLog(@"reset index = %d",index);
+    
+    MomoAnimationView *momoBtn = (MomoAnimationView *)[momoView viewWithTag:(index+1)*100];
+    [momoBtn stopPerformSelector];
+    [momoBtn removeFromSuperview];
+    momoBtn = nil;
+    
+    cb = [CustomButton initWithDelegate:self];
+    UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(index+1) :nil];
+        
+    MomoAnimationView *newMomoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
+    [newMomoBtn growMomo];
+    [newMomoBtn calucDirtyState];
+    [newMomoBtn calucInjuryState];
+    [newMomoBtn setStateEffect];
+    [newMomoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5*index];
+    newMomoBtn.center = point[index];
+    
+    [momoView addSubview:newMomoBtn];
 }
 
 - (void)setBack
@@ -162,9 +187,11 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     [UIView setAnimationDuration:30.0];
-    [UIView setAnimationsEnabled:isAnimation];
+    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(backAnimation)];
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(backAnimation)];
+    }
     
     backImg.center = CGPointMake(backImgPoint.x - 160, backImgPoint.y);
     
