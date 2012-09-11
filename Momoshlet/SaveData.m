@@ -122,9 +122,9 @@ SaveData *saveData = nil;
 
 - (void)countUpInjuryLevel:(NSNumber *)number
 {
-    int index = [number intValue];
+    @synchronized(self){
+        int index = [number intValue];
     
-    //@synchronized(self){
         NSMutableDictionary *dic = [statusArray objectAtIndex:index];
         int injury_level = [[dic objectForKey:@"injury_level"] intValue];
     
@@ -138,14 +138,14 @@ SaveData *saveData = nil;
         }
     
         NSLog(@"index = %d, injury_level = %d",index, [[[statusArray objectAtIndex:index] objectForKey:@"injury_level"] intValue]);
-    //}
+    }
 }
 
 - (void)countUpDirtyLevel:(NSNumber *)number
 {
-    int index = [number intValue];
+    @synchronized(self){
+        int index = [number intValue];
     
-    //@synchronized(self){
         NSMutableDictionary *dic = [statusArray objectAtIndex:index];
         int dirty_level = [[dic objectForKey:@"dirty_level"] intValue];
     
@@ -159,7 +159,7 @@ SaveData *saveData = nil;
         }
     
         NSLog(@"index = %d, dirty_level = %d",index ,[[[statusArray objectAtIndex:index] objectForKey:@"dirty_level"] intValue]);
-    //}
+    }
 }
 
 @end
