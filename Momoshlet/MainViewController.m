@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "AppDelegate.h"
 
 @interface MainViewController ()
 
@@ -56,6 +57,8 @@
     isAnimation = YES;
     [self backAnimation];
     //self.view.backgroundColor = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
+    
+    NSLog(@"%@",self.tabBarItem.title);
 }
 
 - (void)viewDidUnload
@@ -81,6 +84,10 @@
         [breed removeFromSuperview];
         breed = nil;
     }
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app tabBatItemCollectionEnabled:YES];
+    [app tabBatItemMainEnabled:YES];
 }
 
 - (void)setMomoButton
