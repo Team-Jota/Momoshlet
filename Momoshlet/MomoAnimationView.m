@@ -21,6 +21,7 @@
         saveData = [SaveData initSaveData];
         button = btn;
         index = (btn.tag/10)-1;
+        self.tag = btn.tag * 10;
         
         scaleView = [[UIView alloc] initWithFrame:button.frame];
         scaleView.transform = CGAffineTransformMakeScale(0.25, 0.25);
@@ -38,10 +39,12 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDelay:0.01];
     [UIView setAnimationDuration:1.0];
-    [UIView setAnimationsEnabled:isAnimation];
+    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(statAniamtion)];
-    
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(statAniamtion)];
+    }
+        
     self.center = CGPointMake(self.center.x+10, self.center.y);
     self.transform = CGAffineTransformRotate(self.transform, -0.25);
     
@@ -52,10 +55,12 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:1.0];
-    [UIView setAnimationsEnabled:isAnimation];
+    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animation4)];
-    
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(animation4)];
+    }
+        
     self.center = CGPointMake(self.center.x-10, self.center.y);
     self.transform = CGAffineTransformRotate(self.transform, 0.25);
     
@@ -67,9 +72,11 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDelay:0.01];
     [UIView setAnimationDuration:1.0];
-    [UIView setAnimationsEnabled:isAnimation];
+    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animation3)];
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(animation3)];
+    }
     
     self.center = CGPointMake(self.center.x-10, self.center.y);
     self.transform = CGAffineTransformRotate(self.transform, 0.25);
@@ -81,10 +88,12 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:1.0];
-    [UIView setAnimationsEnabled:isAnimation];
+    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animation2)];
-    
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(animation2)];
+    }
+        
     self.center = CGPointMake(self.center.x+10, self.center.y);
     self.transform = CGAffineTransformRotate(self.transform, -0.25);
     
@@ -112,7 +121,7 @@
 
 - (void)setStateEffect
 {
-    @synchronized(self){
+    //@synchronized(self){
     if (stateEffectView) {
         [stateEffectView removeFromSuperview];
         stateEffectView = nil;
@@ -148,7 +157,7 @@
     stateEffectView.frame = button.frame;
     
     [scaleView addSubview:stateEffectView];
-    }
+    //}
 }
 
 - (void)calucInjuryState
@@ -178,12 +187,12 @@
     }
     
     if (random <= range && [[status objectForKey:@"injury_level"] intValue] < 5) {
-        @autoreleasepool {
+        /*@autoreleasepool {
             [NSThread detachNewThreadSelector:@selector(countUpInjuryLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
             [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
-        }
-        //[saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
-        //[self setStateEffect];
+        }*/
+        [saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
+        [self setStateEffect];
     }
     
     [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*10];
@@ -216,15 +225,25 @@
     }
     
     if (random <= range && [[status objectForKey:@"dirty_level"] intValue] < 5) {
-        @autoreleasepool {
+        /*@autoreleasepool {
             [NSThread detachNewThreadSelector:@selector(countUpDirtyLevel:) toTarget:saveData withObject:[NSNumber numberWithInt:index]];
             [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
-        }
-        //[saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
-        //[self setStateEffect];
+        }*/
+        [saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
+        [self setStateEffect];
     }
     
     [self performSelector:@selector(calucDirtyState) withObject:nil afterDelay:DIRTY_INTERVAL*10];
+}
+
+- (void)stopPerformSelector
+{
+     //NSLog(@"in stopPerformSelectorop");
+      
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    //[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(calucDirtyState) object:nil];
+    //[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(calucInjuryState) object:nil];
 }
 
 /*
@@ -235,5 +254,4 @@
     // Drawing code
 }
 */
-
 @end
