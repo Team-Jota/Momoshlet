@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
+#import "SaveData.h"
 
 @protocol CatchBugViewDelegate;
 
 @interface CatchBugView : UIView{
     CustomButton *cb;
+    SaveData *saveData;
+    int index;
     id<CatchBugViewDelegate> delegate;
 }
 
--(id)initWithDelegate:(id)_delegate;
+-(id)initWithDelegate:(id)_delegate:(int)_index;
 
 @end
 

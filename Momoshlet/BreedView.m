@@ -116,7 +116,7 @@
 
 - (void)catchBugView:(UIButton*)btn
 {
-    catchBug = [[CatchBugView alloc]initWithDelegate:self];
+    catchBug = [[CatchBugView alloc]initWithDelegate:self:index];
     [self addSubview:catchBug];
 }
 

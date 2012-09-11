@@ -10,15 +10,17 @@
 
 @implementation CatchBugView
 
-- (id)initWithDelegate:(id)_delegate
+- (id)initWithDelegate:(id)_delegate:(int)_index
 {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
+    saveData = [SaveData initSaveData];
     
     if(self){
         cb = [CustomButton initWithDelegate:self];
         delegate = _delegate;
         self.backgroundColor = [UIColor blackColor];
-
+        index = _index;
+        
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveCatchBugView) :100 :nil];
         rmButton.backgroundColor = [UIColor blueColor];
         [self addSubview:rmButton];
