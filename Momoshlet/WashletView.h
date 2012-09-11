@@ -18,8 +18,13 @@
     CustomButton *cb;
     id<WashletViewDelegate> delegate;
     
-    UIImageView *momoImg;
-    UIView *effectView;
+    UIView *momoView;
+    UIImageView *momoHitImg;
+    UIImageView *momoNotHitImg;
+    
+    UIView *moveView;
+    UIImageView *waterView;
+    UIImageView *nozzleImg;
     
     UIImageView *dirty1;
     UIImageView *dirty2;
@@ -27,14 +32,15 @@
     UIImageView *dirty4;
     UIImageView *dirty5;
     
-    UIImageView *nozzleImg;
-    
     NSMutableArray *dirtyIVArray;
     
     CGPoint delta;
     CGPoint translation;
     float imgRadius;
     int index;
+    
+    BOOL isAnimation;
+    int dirtyLevel;
 }
 
 @property(nonatomic,retain) UIImageView *nozzleImg;
