@@ -24,6 +24,9 @@
         delegate = _delegate;
         index = _index;
         
+        catchBug = nil;
+        shipment = nil;
+        washlet = nil;
         effectView = nil;
         
         [self updateStatus];
@@ -130,22 +133,25 @@
 - (void)removeShipmentView{
     if(shipment){
         [shipment removeFromSuperview];
+        shipment = nil;
     }
 }
 
 - (void)removeCatchBugView{
     if(catchBug){
         [catchBug removeFromSuperview];
+        catchBug = nil;
     }
 }
 
 - (void)removeWashletView{
     if(washlet){
         [self updateStatus];
+        [delegate resetMomoButton:index];
         [washlet removeFromSuperview];
+        washlet = nil;
     }
 }
-
 
 - (void)callRemoveBreedView{
     [delegate removeBreedView];
