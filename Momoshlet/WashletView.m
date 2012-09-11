@@ -9,6 +9,8 @@
 #import "WashletView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define BETWEEN 35
+
 @implementation WashletView
 
 @synthesize nozzleImg;
@@ -20,8 +22,10 @@
         saveData = [SaveData initSaveData];
         cb = [CustomButton initWithDelegate:self];
         delegate = _delegate;
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor whiteColor];
         
+        NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+        dirtyLevel = [[status objectForKey:@"dirty_level"]intValue];
         index = _index;
         
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveWashletView) :100 :nil];
@@ -29,20 +33,43 @@
         [self addSubview:rmButton];
         
         //桃
-        momoImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
-        momoImg.frame = CGRectMake(35, 30, 250, 250);
-        [self addSubview:momoImg];
+        momoView = [[UIView alloc] initWithFrame:CGRectMake(BETWEEN, 30, 250, 250)];
+        momoView.backgroundColor = [UIColor clearColor];
+        [self addSubview:momoView];
+        
+        momoNotHitImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
+        momoNotHitImg.frame = CGRectMake(0, 0, 250, 250);
+        [momoView addSubview:momoNotHitImg];
+        
+        momoHitImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-3.png"]];
+        momoHitImg.frame = CGRectMake(0, 0, 250, 250);
+        [momoView addSubview:momoHitImg];
+        
+        moveView = [[UIView alloc] initWithFrame:CGRectMake(110,350, 100, 100)];
+        [self addSubview:moveView];
+        imgRadius = nozzleImg.frame.size.width/2;
+        delta = CGPointMake(0.0, 0.0);
+        translation = moveView.center;
+        
+        waterView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"water.png"]];
+        waterView.frame = CGRectMake(0, -150, 100, 300);
+        [moveView addSubview:waterView];
+        
+        isAnimation = YES;
+        [self waterAnimation];
         
         //汚れの反映
         [self setStateEffect];
         
         //ノズル
-        nozzleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
-        nozzleImg.frame = CGRectMake(110,350,100,100);
-        [self addSubview:nozzleImg];
-        imgRadius = nozzleImg.frame.size.width/2;
-        delta = CGPointMake(0.0, 0.0);
-        translation = nozzleImg.center;
+        nozzleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
+        nozzleImg.frame = CGRectMake(0, 0, 100, 100);
+        [moveView addSubview:nozzleImg];
+        //nozzleImg.frame = CGRectMake(110,350,100,100);
+        //[self addSubview:nozzleImg];
+        //imgRadius = nozzleImg.frame.size.width/2;
+        //delta = CGPointMake(0.0, 0.0);
+        //translation = nozzleImg.center;
         
         UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
         accel.delegate = self;
@@ -54,45 +81,46 @@
 
 - (void)setStateEffect
 {
-    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
-    int indexCount = [[status objectForKey:@"dirty_level"]integerValue];
+    CGRect rect = CGRectMake(0, 0, 250, 250);
+    dirty1 = nil;
+    dirty2 = nil;
+    dirty3 = nil;
+    dirty4 = nil;
+    dirty5 = nil;
+
     
-    effectView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 250, 250)];
-    
-    if(indexCount>=1){
+    if(dirtyLevel>=1){
         dirty1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty1.png"]];
-        dirty1.frame = effectView.frame;
-        [effectView addSubview:dirty1];
+        dirty1.frame = rect;
+        [momoView addSubview:dirty1];
     }
-    if(indexCount>=2){
+    if(dirtyLevel>=2){
         dirty2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty2.png"]];
-        dirty2.frame = effectView.frame;
-        [effectView addSubview:dirty2];
+        dirty2.frame = rect;
+        [momoView addSubview:dirty2];
     }
-    if(indexCount>=3){
+    if(dirtyLevel>=3){
         dirty3 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty3.png"]];
-        dirty3.frame = effectView.frame;
-        [effectView addSubview:dirty3];
+        dirty3.frame = rect;
+        [momoView addSubview:dirty3];
     }
-    if(indexCount>=4){
+    if(dirtyLevel>=4){
         dirty4 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty4.png"]];
-        dirty4.frame = effectView.frame;
-        [effectView addSubview:dirty4];
+        dirty4.frame = rect;
+        [momoView addSubview:dirty4];
     }
-    if(indexCount==5){
+    if(dirtyLevel==5){
         dirty5 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty5.png"]];
-        dirty5.frame = effectView.frame;
-        [effectView addSubview:dirty5];
+        dirty5.frame = rect;
+        [momoView addSubview:dirty5];
     }
     
-    [momoImg addSubview:effectView];
-    
-    dirty3.alpha = 0.2;
+    //dirty3.alpha = 0.2;
     NSLog(@"dirty1 coordinate:%f",dirty5.center.x);
 }
     
 
-- (void)washMomo
+/*- (void)washMomo
 {
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     int indexCount = [[status objectForKey:@"dirty_level"]integerValue];
@@ -139,7 +167,7 @@
     if((235<=translation.x)&&(translation.x<285)){
         
     }
-}
+}*/
 
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration{
@@ -163,11 +191,97 @@
         translation.x = imgRadius;
     }
     
-    //[UIView beginAnimations:@"translate" context:nil];
-    //nozzleImg.transform = CGAffineTransformMakeTranslation(translation.x, translation.y);
-    nozzleImg.center = CGPointMake(translation.x , translation.y);
-    //translation.x = translation.x + delta.x;
-    //[UIView commitAnimations];
+    moveView.center = CGPointMake(translation.x , translation.y);
+    
+    if (moveView.center.x > 73+BETWEEN && moveView.center.x <= 98+BETWEEN && dirty5!=nil && dirty5.alpha > 0) {
+        dirty5.alpha -= 0.005;
+        momoHitImg.hidden = NO;
+        momoNotHitImg.hidden = YES;
+    }
+    else if (moveView.center.x > 98+BETWEEN && moveView.center.x <= 117+BETWEEN && dirty3!=nil && dirty3.alpha > 0) {
+        dirty3.alpha -= 0.005;
+        momoHitImg.hidden = NO;
+        momoNotHitImg.hidden = YES;
+    }
+    else if (moveView.center.x > 117+BETWEEN && moveView.center.x <= 137+BETWEEN && dirty1!=nil && dirty1.alpha > 0) {
+        dirty1.alpha -= 0.005;
+        momoHitImg.hidden = NO;
+        momoNotHitImg.hidden = YES;
+    }
+    else if (moveView.center.x > 137+BETWEEN && moveView.center.x <= 160+BETWEEN && dirty2!=nil && dirty2.alpha > 0) {
+        dirty2.alpha -= 0.005;
+        momoHitImg.hidden = NO;
+        momoNotHitImg.hidden = YES;
+    }
+    else if (moveView.center.x > 160+BETWEEN && moveView.center.x <= 184+BETWEEN && dirty4!=nil && dirty4.alpha > 0) {
+        dirty4.alpha -= 0.005;
+        momoHitImg.hidden = NO;
+        momoNotHitImg.hidden = YES;
+    }
+    else {
+        momoHitImg.hidden = YES;
+        momoNotHitImg.hidden = NO;
+    }
+    
+    NSLog(@"1 = %f, 2 = %f, 3 = %f, 4 = %f, 5 = %f"
+          ,dirty1.alpha,dirty2.alpha,dirty3.alpha,dirty4.alpha,dirty5.alpha);
+    
+    if (dirtyLevel==1) {
+        if (dirty1.alpha<0) {
+            [self callRemoveWashletView];
+        }
+    }
+    else if (dirtyLevel==2) {
+        if (dirty1.alpha<0 && dirty2.alpha<0) {
+            [self callRemoveWashletView];
+        }
+    }
+    else if (dirtyLevel==3) {
+        if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0) {
+            [self callRemoveWashletView];
+        }
+    }
+    else if (dirtyLevel==4) {
+        if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0 && dirty4.alpha<0) {
+            [self callRemoveWashletView];
+        }
+    }
+    else if (dirtyLevel==5) {
+        if (dirty1.alpha<0 && dirty2.alpha<0 && dirty3.alpha<0 && dirty4.alpha<0 && dirty5.alpha<0) {
+            [self callRemoveWashletView];
+        }
+    }
+}
+
+- (void)waterAnimation2
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDelay:0.01];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationsEnabled:isAnimation];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(waterAnimation)];
+    
+    waterView.center = CGPointMake(waterView.center.x, waterView.center.y+25);
+    
+    [UIView commitAnimations];
+}
+
+- (void)waterAnimation
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDelay:0.01];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationsEnabled:isAnimation];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(waterAnimation2)];
+    
+    waterView.center = CGPointMake(waterView.center.x, waterView.center.y-25);
+    
+    
+    [UIView commitAnimations];
 }
 
 - (void)callRemoveWashletView
