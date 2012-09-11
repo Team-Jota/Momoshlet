@@ -19,7 +19,14 @@
     id<WashletViewDelegate> delegate;
     
     UIImageView *momoImg;
-    UIImageView *effectImg;
+    UIView *effectView;
+    
+    UIImageView *dirty1;
+    UIImageView *dirty2;
+    UIImageView *dirty3;
+    UIImageView *dirty4;
+    UIImageView *dirty5;
+    
     UIImageView *nozzleImg;
     
     NSMutableArray *dirtyIVArray;

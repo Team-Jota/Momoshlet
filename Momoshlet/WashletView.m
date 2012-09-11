@@ -54,29 +54,92 @@
 
 - (void)setStateEffect
 {
-    //汚れUIImageViewの保管
-    effectImg = [[UIImageView alloc]init];
-    dirtyIVArray = [NSMutableArray array];
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
-    for (int i=1; i<=[[status objectForKey:@"dirty_level"]integerValue]; i++) {
-        UIImageView *imgViewTmp = [[UIImageView alloc]initWithImage:
-                                   [UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]]];
-        imgViewTmp.frame = CGRectMake(0, 0, 250, 250);
-        [dirtyIVArray insertObject:imgViewTmp atIndex:i-1];
-        [effectImg addSubview:[dirtyIVArray objectAtIndex:i-1]];
+    int indexCount = [[status objectForKey:@"dirty_level"]integerValue];
+    
+    effectView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 250, 250)];
+    
+    if(indexCount>=1){
+        dirty1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty1.png"]];
+        dirty1.frame = effectView.frame;
+        [effectView addSubview:dirty1];
     }
-    effectImg.frame = CGRectMake(0,0,250,250);
-    [momoImg addSubview:effectImg];
+    if(indexCount>=2){
+        dirty2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty2.png"]];
+        dirty2.frame = effectView.frame;
+        [effectView addSubview:dirty2];
+    }
+    if(indexCount>=3){
+        dirty3 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty3.png"]];
+        dirty3.frame = effectView.frame;
+        [effectView addSubview:dirty3];
+    }
+    if(indexCount>=4){
+        dirty4 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty4.png"]];
+        dirty4.frame = effectView.frame;
+        [effectView addSubview:dirty4];
+    }
+    if(indexCount==5){
+        dirty5 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dirty5.png"]];
+        dirty5.frame = effectView.frame;
+        [effectView addSubview:dirty5];
+    }
+    
+    [momoImg addSubview:effectView];
+    
+    dirty3.alpha = 0.2;
+    NSLog(@"dirty1 coordinate:%f",dirty5.center.x);
 }
+    
 
-/*
 - (void)washMomo
 {
-    for(int i=0;i<dirtyIVArray.count;i++){
-        if((dirtyIVArray[i].center.x-50<translation.x)&&(translation.x<dirtyIVArray[i].center.x+50)){
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    int indexCount = [[status objectForKey:@"dirty_level"]integerValue];
+    
+    if(indexCount>=1){
+        if(dirty1.alpha==0){
+            [self callRemoveWashletView];
         }
     }
-}*/
+    if(indexCount>=2){
+        if(dirty1.alpha==0){
+            [self callRemoveWashletView];
+        }
+    }
+    if(indexCount>=3){
+        if(dirty1.alpha==0){
+            [self callRemoveWashletView];
+        }
+    }
+    if(indexCount>=4){
+        if(dirty1.alpha==0){
+            [self callRemoveWashletView];
+        }
+    }
+    if(indexCount>=5){
+        if(dirty1.alpha==0){
+            [self callRemoveWashletView];
+        }
+    }
+    
+    
+    if((35<=translation.x)&&(translation.x<85)){
+        
+    }
+    if((85<=translation.x)&&(translation.x<135)){
+        
+    }
+    if((135<=translation.x)&&(translation.x<185)){
+        
+    }
+    if((185<=translation.x)&&(translation.x<235)){
+        
+    }
+    if((235<=translation.x)&&(translation.x<285)){
+        
+    }
+}
 
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration{
