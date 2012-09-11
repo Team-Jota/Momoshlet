@@ -16,16 +16,16 @@
     CustomButton *cb;
     id<WashletViewDelegate> delegate;
     
-    UIImageView *img;
+    UIImageView *nozzleImg;
     CGPoint delta;
     CGPoint translation;
-    float ballRadius;
+    float imgRadius;
     
     
     float currentSpeed;
 }
 
-@property(nonatomic,retain) UIImageView *img;
+@property(nonatomic,retain) UIImageView *nozzleImg;
 
 -(id)initWithDelegate:(id)_delegate;
 
