@@ -70,10 +70,13 @@
     }
     
     NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
-    if(0<[[status objectForKey:@"injury_level"]integerValue]||0<[[status objectForKey:@"dirty_level"]integerValue])
+    if(0<[[status objectForKey:@"injury_level"] intValue] || 0<[[status objectForKey:@"dirty_level"] intValue]) {
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
-    else
+    }
+    else {
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
+    }
+    
     momoIV.frame = CGRectMake(70,120,250,250);
     
     [self setStateEffect];
@@ -92,11 +95,11 @@
     
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     
-    for (int i=1; i<=[[status objectForKey:@"dirty_level"]integerValue]; i++) {
+    for (int i=1; i<=[[status objectForKey:@"dirty_level"] intValue]; i++) {
         [[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
     }
 
-    for (int i=1; i<=[[status objectForKey:@"injury_level"]integerValue]; i++) {
+    for (int i=1; i<=[[status objectForKey:@"injury_level"] intValue]; i++) {
         [[UIImage imageNamed:[NSString stringWithFormat:@"bug%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
     }
     
