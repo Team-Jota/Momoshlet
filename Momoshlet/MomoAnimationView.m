@@ -132,9 +132,11 @@
     NSString *imgName;
     if ([[status objectForKey:@"injury_level"] intValue] > 0 || [[status objectForKey:@"dirty_level"] intValue] > 0) {
         imgName = [NSString stringWithFormat:@"momo%d-2.png",[[status objectForKey:@"id"] intValue]/100];
+        //imgName = [NSString stringWithFormat:@"momo6-2.png"];
     }
     else {
         imgName = [NSString stringWithFormat:@"momo%d-1.png",[[status objectForKey:@"id"] intValue]/100];
+        //imgName = [NSString stringWithFormat:@"momo6-1.png"];
     }
     
     [button setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
