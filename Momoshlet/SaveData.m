@@ -135,7 +135,7 @@ SaveData *saveData = nil;
             [self saveSaveData:STATUS];
         }
     
-        NSLog(@"index = %d, injury_level = %d",index, [[[statusArray objectAtIndex:index] objectForKey:@"injury_level"] intValue]);
+        //NSLog(@"index = %d, injury_level = %d",index, [[[statusArray objectAtIndex:index] objectForKey:@"injury_level"] intValue]);
     //}
 }
 
@@ -156,7 +156,7 @@ SaveData *saveData = nil;
             [self saveSaveData:STATUS];
         }
     
-        NSLog(@"index = %d, dirty_level = %d",index ,[[[statusArray objectAtIndex:index] objectForKey:@"dirty_level"] intValue]);
+        //NSLog(@"index = %d, dirty_level = %d",index ,[[[statusArray objectAtIndex:index] objectForKey:@"dirty_level"] intValue]);
     //}
 }
 
@@ -164,6 +164,16 @@ SaveData *saveData = nil;
 {
     NSMutableDictionary *dic = [statusArray objectAtIndex:index];
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_level"];//5段階
+    
+    [statusArray replaceObjectAtIndex:index withObject:dic];
+    
+    [self saveSaveData:STATUS];
+}
+
+- (void)resetInjury:(int)index
+{
+    NSMutableDictionary *dic = [statusArray objectAtIndex:index];
+    [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_level"];//5段階
     
     [statusArray replaceObjectAtIndex:index withObject:dic];
     
