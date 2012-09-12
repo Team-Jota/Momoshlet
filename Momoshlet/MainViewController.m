@@ -49,7 +49,6 @@
     
     cb = [CustomButton initWithDelegate:self];
     saveData = [SaveData initSaveData];
-    momoView = nil;
     
     [self setMomoButton];
     
@@ -95,6 +94,8 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app tabBatItemCollectionEnabled:YES];
     [app tabBatItemMainEnabled:YES];
+    
+    //NSLog(@"mainview dirty_level = %d",[[[saveData.statusArray objectAtIndex:3] objectForKey:@"dirty_level"] intValue]);
 }
 
 - (void)setMomoButton
