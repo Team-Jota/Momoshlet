@@ -23,5 +23,6 @@
 - (void)countUpInjuryLevel:(NSNumber *)number;
 - (void)countUpDirtyLevel:(NSNumber *)number;
 - (void)resetDirty:(int)_index;
+- (void)resetInjury:(int)index;
 
 @end
