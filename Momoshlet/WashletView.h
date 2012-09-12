@@ -44,8 +44,6 @@
     BOOL isFinish;
 }
 
-@property(nonatomic,retain) UIImageView *nozzleImg;
-
 -(id)initWithDelegate:(id)_delegate:(int)_index;
 
 @end
