@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SaveData.h"
 #import "CustomButton.h"
-
+#import <AVFoundation/AVFoundation.h>
 
 @protocol WashletViewDelegate;
 
@@ -24,7 +24,7 @@
     
     UIView *moveView;
     UIImageView *waterView;
-    UIImageView *nozzleImg;
+    //UIImageView *nozzleImg;
     
     UIImageView *dirty1;
     UIImageView *dirty2;
@@ -36,15 +36,24 @@
     
     CGPoint delta;
     CGPoint translation;
+    CGPoint waterPoint;
     float imgRadius;
     int index;
     
     int dirtyLevel;
     BOOL isAnimation;
+    BOOL isWaterAnimation;
     BOOL isFinish;
+    BOOL isAccelerometer;
+    
+    AVAudioPlayer *start;
+    AVAudioPlayer *washing;
+    AVAudioPlayer *end;
+    AVAudioPlayer *junny;
 }
 
 -(id)initWithDelegate:(id)_delegate:(int)_index;
+- (void)startWashlet;
 
 @end
 
