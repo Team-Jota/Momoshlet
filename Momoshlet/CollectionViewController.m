@@ -95,7 +95,7 @@
                 NSString *img;
                 img = @"momo_shade.png";
                 
-                UIButton *btn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(detailView:) :count*10 :img];
+                UIButton *btn = [cb makeButton:CGRectMake(0, 0, 250, 250) :@selector(detailView:) :count*10 :img];
                 btn.transform = CGAffineTransformMakeScale(0.5, 0.5);
                 btn.center = CGPointMake(80+160*k, 120+200*j);
                 
