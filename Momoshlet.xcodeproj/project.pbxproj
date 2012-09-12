@@ -27,6 +27,12 @@
 		E343090C15F9ECB700458E48 /* ShipmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E343090B15F9ECB700458E48 /* ShipmentView.m */; };
 		E343091015F9ECD400458E48 /* CatchBugView.m in Sources */ = {isa = PBXBuildFile; fileRef = E343090F15F9ECD400458E48 /* CatchBugView.m */; };
 		E343091315F9ECF300458E48 /* WashletView.m in Sources */ = {isa = PBXBuildFile; fileRef = E343091215F9ECF300458E48 /* WashletView.m */; };
+		E3565EA2160029D600C55B3B /* junnry.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E3565E9E160029D600C55B3B /* junnry.m4a */; };
+		E3565EA3160029D600C55B3B /* wash_end.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E3565E9F160029D600C55B3B /* wash_end.m4a */; };
+		E3565EA4160029D600C55B3B /* wash_start.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E3565EA0160029D600C55B3B /* wash_start.m4a */; };
+		E3565EA5160029D600C55B3B /* washing.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E3565EA1160029D600C55B3B /* washing.m4a */; };
+		E3565EA816002A3C00C55B3B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3565EA716002A3C00C55B3B /* AVFoundation.framework */; };
+		E3565EAA1600459C00C55B3B /* nozzle.png in Resources */ = {isa = PBXBuildFile; fileRef = E3565EA91600459C00C55B3B /* nozzle.png */; };
 		E3572FA015FB27F200AD354B /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = E3572F9F15FB27F200AD354B /* tree.png */; };
 		E3572FB015FB928900AD354B /* MomoAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3572FAF15FB928900AD354B /* MomoAnimationView.m */; };
 		E3869B4815FDB1CD00EBB8F1 /* bug1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3869B3C15FDB1CD00EBB8F1 /* bug1.png */; };
@@ -94,6 +100,12 @@
 		E343090F15F9ECD400458E48 /* CatchBugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchBugView.m; sourceTree = "<group>"; };
 		E343091115F9ECF300458E48 /* WashletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashletView.h; sourceTree = "<group>"; };
 		E343091215F9ECF300458E48 /* WashletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashletView.m; sourceTree = "<group>"; };
+		E3565E9E160029D600C55B3B /* junnry.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = junnry.m4a; sourceTree = "<group>"; };
+		E3565E9F160029D600C55B3B /* wash_end.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = wash_end.m4a; sourceTree = "<group>"; };
+		E3565EA0160029D600C55B3B /* wash_start.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = wash_start.m4a; sourceTree = "<group>"; };
+		E3565EA1160029D600C55B3B /* washing.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = washing.m4a; sourceTree = "<group>"; };
+		E3565EA716002A3C00C55B3B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E3565EA91600459C00C55B3B /* nozzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nozzle.png; sourceTree = "<group>"; };
 		E3572F9F15FB27F200AD354B /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
 		E3572FAE15FB928900AD354B /* MomoAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomoAnimationView.h; sourceTree = "<group>"; };
 		E3572FAF15FB928900AD354B /* MomoAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomoAnimationView.m; sourceTree = "<group>"; };
@@ -125,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3565EA816002A3C00C55B3B /* AVFoundation.framework in Frameworks */,
 				E300EC3515F82449003CF51C /* UIKit.framework in Frameworks */,
 				E300EC3715F82449003CF51C /* Foundation.framework in Frameworks */,
 				E300EC3915F82449003CF51C /* CoreGraphics.framework in Frameworks */,
@@ -166,6 +179,7 @@
 		E300EC3315F82449003CF51C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3565EA716002A3C00C55B3B /* AVFoundation.framework */,
 				E300EC3415F82449003CF51C /* UIKit.framework */,
 				E300EC3615F82449003CF51C /* Foundation.framework */,
 				E300EC3815F82449003CF51C /* CoreGraphics.framework */,
@@ -177,6 +191,7 @@
 		E300EC3A15F82449003CF51C /* Momoshlet */ = {
 			isa = PBXGroup;
 			children = (
+				E3565E9D160029D600C55B3B /* audio */,
 				E3D0AEE615F8BC7D00691301 /* img */,
 				E300EC4315F82449003CF51C /* AppDelegate.h */,
 				E300EC4415F82449003CF51C /* AppDelegate.m */,
@@ -238,6 +253,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E3565E9D160029D600C55B3B /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				E3565E9E160029D600C55B3B /* junnry.m4a */,
+				E3565E9F160029D600C55B3B /* wash_end.m4a */,
+				E3565EA0160029D600C55B3B /* wash_start.m4a */,
+				E3565EA1160029D600C55B3B /* washing.m4a */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
 		E3869B3B15FDB1CD00EBB8F1 /* breed */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +292,7 @@
 				E3869B9015FEDA5100EBB8F1 /* day.png */,
 				E3869BA615FF423B00EBB8F1 /* water.png */,
 				E3869B8D15FED28500EBB8F1 /* night.png */,
+				E3565EA91600459C00C55B3B /* nozzle.png */,
 				E3D0AEE715F8BC7D00691301 /* momo_shade.png */,
 			);
 			path = img;
@@ -362,6 +389,11 @@
 				E3869B9115FEDA5100EBB8F1 /* day.png in Resources */,
 				E3869BA715FF423B00EBB8F1 /* water.png in Resources */,
 				E3869BAA15FF561A00EBB8F1 /* momo1-3.png in Resources */,
+				E3565EA2160029D600C55B3B /* junnry.m4a in Resources */,
+				E3565EA3160029D600C55B3B /* wash_end.m4a in Resources */,
+				E3565EA4160029D600C55B3B /* wash_start.m4a in Resources */,
+				E3565EA5160029D600C55B3B /* washing.m4a in Resources */,
+				E3565EAA1600459C00C55B3B /* nozzle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
