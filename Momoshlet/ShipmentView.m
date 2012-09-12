@@ -20,8 +20,10 @@
         cb = [CustomButton initWithDelegate:self];
         
         delegate =_delegate;
-        
-        self.backgroundColor = [UIColor blueColor];
+
+        UIImageView *bgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"breedtree.png"]];
+        bgImg.frame = CGRectMake(0, 0, 320, 480);
+        [self addSubview:bgImg];
         
         UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveShipmentView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
