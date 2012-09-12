@@ -29,7 +29,6 @@
 
 - (id)initWithDelegate:(id)_delegate:(int)_index;
 - (void)updateStatus;
-- (void)setStateEffect;
 
 @end
 
