@@ -24,10 +24,7 @@
     CGPoint point[6];
 }
 
-- (void) removeBreedView;
-- (void)setMomoButton;
-- (void)setBack;
-- (void)backAnimation;
+- (void)removeBreedView;
 - (void)resetMomoButton:(int)index;
 
 @end
