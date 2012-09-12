@@ -29,29 +29,27 @@
         washlet = nil;
         effectView = nil;
         
+        UIImageView *bgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"breedtree.png"]];
+        bgImg.frame = CGRectMake(0, 0, 320, 480);
+        [self addSubview:bgImg];
+        
         [self updateStatus];
         
-        UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
+        UIButton *rmButton = [cb makeButton:CGRectMake(0, 200, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
         rmButton.backgroundColor = [UIColor redColor];
         [self addSubview:rmButton];
         
         //TODO 修正する
         //ShipmentButton
-        UIButton *shipmentBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(shipmentView:) :1000 :[NSString stringWithFormat:@"momo_shade.png"]];
-        shipmentBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
-        shipmentBtn.center = CGPointMake(180, 50);
+        UIButton *shipmentBtn = [cb makeButton:CGRectMake(100, 200, 50, 50) :@selector(shipmentView:) :1000 :[NSString stringWithFormat:@"momo_shade.png"]];
         [self addSubview:shipmentBtn];
         
         //CatchBugButton
-        UIButton *catchBugBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(catchBugView:) :2000 :[NSString stringWithFormat:@"momo_shade.png"]];
-        catchBugBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
-        catchBugBtn.center = CGPointMake(100, 50);
+        UIButton *catchBugBtn = [cb makeButton:CGRectMake(0, 280, 50, 50) :@selector(catchBugView:) :2000 :[NSString stringWithFormat:@"momo_shade.png"]];
         [self addSubview:catchBugBtn];
         
         //WashetButton
-        UIButton *washletBtn = [cb makeButton:CGRectMake(0, 0, 250, 200) :@selector(washletView:) :3000 :[NSString stringWithFormat:@"momo_shade.png"]];
-        washletBtn.transform = CGAffineTransformMakeScale(0.3, 0.3);
-        washletBtn.center = CGPointMake(50, 240);
+        UIButton *washletBtn = [cb makeButton:CGRectMake(100, 280, 50, 50) :@selector(washletView:) :3000 :[NSString stringWithFormat:@"momo_shade.png"]];
         [self addSubview:washletBtn];
     }
     
@@ -77,7 +75,8 @@
         momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
     }
     
-    momoIV.frame = CGRectMake(70,120,250,250);
+    momoIV.frame = CGRectMake(0,0,250,250);
+    momoIV.center = CGPointMake(160, momoIV.center.y-20);
     
     [self setStateEffect];
     [self addSubview:momoIV];
@@ -130,6 +129,7 @@
 {
     washlet = [[WashletView alloc]initWithDelegate:self:index];
     [self addSubview:washlet];
+    [washlet startWashlet];
 }
 
 
@@ -142,6 +142,8 @@
 
 - (void)removeCatchBugView{
     if(catchBug){
+        [self updateStatus];
+        [delegate resetMomoButton:index];
         [catchBug removeFromSuperview];
         catchBug = nil;
     }
