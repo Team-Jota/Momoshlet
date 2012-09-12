@@ -23,8 +23,8 @@
 }
 
 - (id)initWithDelegate:(id)_delegate;
-- (void)animation;
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+//- (void)animation;
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end
 
