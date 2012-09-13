@@ -14,12 +14,10 @@
 - (id)initWithDelegate:(id)_delegate:(int)_index
 {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
-    saveData = [SaveData initSaveData];
     
     if (self){
         cb = [CustomButton initWithDelegate:self];
-        
-        self.backgroundColor = [UIColor brownColor];
+        saveData = [SaveData initSaveData];
         
         delegate = _delegate;
         index = _index;
@@ -29,27 +27,27 @@
         washlet = nil;
         effectView = nil;
         
-        UIImageView *bgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"breedtree.png"]];
+        UIImageView *bgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"breedtree2.png"]];
         bgImg.frame = CGRectMake(0, 0, 320, 480);
         [self addSubview:bgImg];
         
-        [self updateStatus];
         
-        UIButton *rmButton = [cb makeButton:CGRectMake(0, 200, 50, 50) :@selector(callRemoveBreedView) :100 :nil];
-        rmButton.backgroundColor = [UIColor redColor];
-        [self addSubview:rmButton];
-        
-        //TODO 修正する
         //ShipmentButton
-        UIButton *shipmentBtn = [cb makeButton:CGRectMake(100, 200, 50, 50) :@selector(shipmentView:) :1000 :[NSString stringWithFormat:@"momo_shade.png"]];
-        [self addSubview:shipmentBtn];
+        shipmentBtn = [cb makeButton:CGRectMake(100, 275, 50, 50) :@selector(shipmentView:) :1000 :[NSString stringWithFormat:@"button2.png"]];
         
         //CatchBugButton
-        UIButton *catchBugBtn = [cb makeButton:CGRectMake(0, 280, 50, 50) :@selector(catchBugView:) :2000 :[NSString stringWithFormat:@"momo_shade.png"]];
-        [self addSubview:catchBugBtn];
+        catchBugBtn = [cb makeButton:CGRectMake(25, 335, 50, 50) :@selector(catchBugView:) :2000 :[NSString stringWithFormat:@"button1.png"]];
         
         //WashetButton
-        UIButton *washletBtn = [cb makeButton:CGRectMake(100, 280, 50, 50) :@selector(washletView:) :3000 :[NSString stringWithFormat:@"momo_shade.png"]];
+        washletBtn = [cb makeButton:CGRectMake(100, 335, 50, 50) :@selector(washletView:) :3000 :[NSString stringWithFormat:@"button3.png"]];
+        
+        [self updateStatus];
+        
+        UIButton *rmButton = [cb makeButton:CGRectMake(25, 275, 50, 50) :@selector(callRemoveBreedView) :100 :@"button4.png"];
+        [self addSubview:rmButton];
+        
+        [self addSubview:shipmentBtn];
+        [self addSubview:catchBugBtn];
         [self addSubview:washletBtn];
     }
     
@@ -68,11 +66,14 @@
     }
     
     NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
-    if(0<[[status objectForKey:@"injury_level"] intValue] || 0<[[status objectForKey:@"dirty_level"] intValue]) {
-        momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-2.png"]];
+    if ([[status objectForKey:@"injury_zero"] boolValue]==YES && [[status objectForKey:@"dirty_zero"] boolValue]==YES) {
+        momoIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"momo%d-3.png",[[status objectForKey:@"id"] intValue]/100]]];
+    }
+    else if(0<[[status objectForKey:@"injury_level"] intValue] || 0<[[status objectForKey:@"dirty_level"] intValue]) {
+        momoIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"momo%d-2.png",[[status objectForKey:@"id"] intValue]/100]]];
     }
     else {
-        momoIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo1-1.png"]];
+        momoIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"momo%d-1.png",[[status objectForKey:@"id"] intValue]/100]]];
     }
     
     momoIV.frame = CGRectMake(0,0,250,250);
@@ -93,12 +94,38 @@
     UIGraphicsBeginImageContext(CGSizeMake(400, 400));
     
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    int dirty_level = [[status objectForKey:@"dirty_level"] intValue];
+    int injury_level = [[status objectForKey:@"injury_level"] intValue];
+    float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"created_at"]];
+    float finishTime = [[status objectForKey:@"hours"] floatValue]*60*60;
+    float size = since / finishTime;
     
-    for (int i=1; i<=[[status objectForKey:@"dirty_level"] intValue]; i++) {
+    if (size >= 1.0) {
+        shipmentBtn.enabled = YES;
+    }
+    else {
+        shipmentBtn.enabled = NO;
+    }
+    
+    if (dirty_level > 0) {
+        washletBtn.enabled = YES;
+    }
+    else {
+        washletBtn.enabled = NO;
+    }
+    
+    if (injury_level > 0) {
+        catchBugBtn.enabled = YES;
+    }
+    else {
+        catchBugBtn.enabled = NO;
+    }
+    
+    for (int i=1; i<=dirty_level; i++) {
         [[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
     }
 
-    for (int i=1; i<=[[status objectForKey:@"injury_level"] intValue]; i++) {
+    for (int i=1; i<=injury_level; i++) {
         [[UIImage imageNamed:[NSString stringWithFormat:@"bug%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
     }
     
@@ -115,14 +142,16 @@
 
 - (void)shipmentView:(UIButton*)btn
 {
-    shipment = [[ShipmentView alloc]initWithDelegate:self];
+    shipment = [[ShipmentView alloc]initWithDelegate:self:index];
     [self addSubview:shipment];
+    [shipment startShipment];
 }
 
 - (void)catchBugView:(UIButton*)btn
 {
     catchBug = [[CatchBugView alloc]initWithDelegate:self:index];
     [self addSubview:catchBug];
+    [catchBug startCatchBug];
 }
 
 - (void)washletView:(UIButton*)btn
@@ -137,6 +166,8 @@
     if(shipment){
         [shipment removeFromSuperview];
         shipment = nil;
+        [delegate resetMomoButton:index];
+        [self callRemoveBreedView];
     }
 }
 
