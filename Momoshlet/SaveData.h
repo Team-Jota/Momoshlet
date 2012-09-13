@@ -24,5 +24,8 @@
 - (void)countUpDirtyLevel:(NSNumber *)number;
 - (void)resetDirty:(int)_index;
 - (void)resetInjury:(int)index;
+- (void)setNewMomo:(int)index;
+- (void)setHeaven:(int)_index:(BOOL)_dirty_zero:(BOOL)_injury_zero;
+- (void)addCollection:(int)_index;
 
 @end
