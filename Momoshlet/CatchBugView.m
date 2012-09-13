@@ -23,6 +23,14 @@
         index = _index;
         isMoveMist = YES;
         NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+        injury_level = [[status objectForKey:@"injury_level"] intValue];
+        
+        sprayAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"spray" ofType:@"m4a"]] error:nil];
+        sprayAudio.numberOfLoops = -1;
+        
+        UIImageView *bgimg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sprayback.png"]];
+        bgimg.frame = CGRectMake(0, 0, 320, 480);
+        [self addSubview:bgimg];
         
         momoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
         momoView.center = CGPointMake(momoView.center.x, 215.5);
@@ -69,9 +77,23 @@
         [sprayView addSubview:mist];
         
         selectedInjury = 1;
-        [self startSprayAnimation];
     }
     return self;
+}
+
+- (void)startCatchBug
+{
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    BOOL dirty_zero = [[status objectForKey:@"dirty_zero"] boolValue];
+    int dirty_level = [[status objectForKey:@"dirty_level"] intValue];
+    
+    if (injury_level==5 && (dirty_zero==YES || dirty_level==5))
+    {
+        [saveData setHeaven:index :YES :dirty_zero];
+    }
+    
+    [saveData resetInjury:index];
+    [self startSprayAnimation];
 }
 
 - (void)setBugImage
@@ -82,9 +104,6 @@
     injury3 = nil;
     injury4 = nil;
     injury5 = nil;
-    
-    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
-    int injury_level = [[status objectForKey:@"injury_level"] intValue];
     
     if (injury_level >= 1) {
         injury1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bug1.png"]];
@@ -119,9 +138,7 @@
 
 - (void)finishBugFall
 {
-    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
-    
-    if (selectedInjury<[[status objectForKey:@"injury_level"] intValue]) {
+    if (selectedInjury<injury_level) {
         selectedInjury++;
         [self startBugFall];
     }
@@ -232,8 +249,10 @@
 
 - (void)startBugFall
 {
-    if (selectedInjury == 1)
+    if (selectedInjury == 1){
         [self moveMist];
+        [sprayAudio play];
+    }
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
@@ -291,6 +310,8 @@
 
 - (void)backSpray
 {
+    [sprayAudio stop];
+    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDelay:0.5];
@@ -321,7 +342,7 @@
 
 - (void)endSprayAnimation
 {
-    [mist stopAnimating];
+    //[mist stopAnimating];
     isMoveMist = NO;
     momoImg.hidden = YES;
     momoImg2.hidden = NO;
@@ -358,7 +379,6 @@
 
 - (void) callRemoveCatchBugView
 {
-    [saveData resetInjury:index];
     [delegate removeCatchBugView];
 }
 
