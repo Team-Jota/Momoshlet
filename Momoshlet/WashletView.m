@@ -38,7 +38,7 @@
         
         end = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"wash_end" ofType:@"m4a"]] error:nil];
         
-        junny = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"junnry" ofType:@"m4a"]] error:nil];
+        junny = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"junney2" ofType:@"m4a"]] error:nil];
         
         UIImageView *bgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wc.png"]];
         bgImg.frame = CGRectMake(0, 0, 320, 480);
@@ -97,6 +97,17 @@
 
 - (void)startWater
 {
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    BOOL injury_zero = [[status objectForKey:@"injury_zero"] boolValue];
+    int injury_level = [[status objectForKey:@"injury_level"] intValue];
+    
+    if (dirtyLevel==5 && (injury_zero==YES || injury_level==5))
+    {
+        [saveData setHeaven:index :YES :injury_zero];
+    }
+    
+    [saveData resetDirty:index];
+    
     [washing play];
     [self waterAnimation];
     isAccelerometer = YES;
@@ -354,7 +365,7 @@
     [washing stop];
     isAccelerometer = NO;
     isWaterAnimation = NO;
-    [waterView stopAnimating];
+    //[waterView stopAnimating];
     
     [self performSelector:@selector(finishAnimation) withObject:nil afterDelay:1.0];
 }
@@ -365,7 +376,6 @@
     if ([end isPlaying] == YES) {
         [end stop];
     }
-    [saveData resetDirty:index];
     [[UIAccelerometer sharedAccelerometer]setDelegate:nil];
     [delegate removeWashletView];
 }
