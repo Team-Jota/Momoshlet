@@ -11,6 +11,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     UITabBarItem *main;
     UITabBarItem *collection;
+    BOOL hasChangedCollection;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -19,5 +20,7 @@
 - (void)setTabBarItemCollection:(UITabBarItem *)item;
 - (void)tabBatItemMainEnabled:(BOOL)enabled;
 - (void)tabBatItemCollectionEnabled:(BOOL)enabled;
+- (void)setHasChangedCollection:(BOOL)flag;
+- (BOOL)getHasChangedCollection;
 
 @end
