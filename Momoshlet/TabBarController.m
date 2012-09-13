@@ -8,6 +8,7 @@
 
 #import "TabBarController.h"
 #import "AppDelegate.h"
+#import "CollectionViewController.h"
 
 @interface TabBarController ()
 
@@ -29,6 +30,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.delegate = self;
+    
     NSArray *viewControllers = self.viewControllers;
     UIViewController *main = [viewControllers objectAtIndex:0];
     UIViewController *collection = [viewControllers objectAtIndex:1];
@@ -47,6 +50,24 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    if ([viewController isMemberOfClass:[CollectionViewController class]]) {
+        if (isCollectionViewController == NO) {
+            isCollectionViewController = YES;
+            
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            if ([app getHasChangedCollection] == YES) {
+                [((CollectionViewController *)viewController) makeScrollView];
+                [app setHasChangedCollection:NO];
+            }
+        }
+    }
+    else {
+        isCollectionViewController = NO;
+    }
 }
 
 @end
