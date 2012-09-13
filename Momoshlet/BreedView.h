@@ -25,6 +25,10 @@
     CustomButton *cb;
     id<BreedViewDelegate> delegate;
     int index;
+    
+    UIButton *shipmentBtn;
+    UIButton *washletBtn;
+    UIButton *catchBugBtn;
 }
 
 - (id)initWithDelegate:(id)_delegate:(int)_index;
