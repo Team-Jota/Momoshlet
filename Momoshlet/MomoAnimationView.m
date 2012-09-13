@@ -7,9 +7,9 @@
 //
 
 #import "MomoAnimationView.h"
-#define INTERVAL 10
-#define INJURY_INTERVAL 1
-#define DIRTY_INTERVAL 1
+#define INTERVAL 1
+#define INJURY_INTERVAL 3
+#define DIRTY_INTERVAL 5
 
 @implementation MomoAnimationView
 
@@ -39,7 +39,6 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDelay:0.01];
     [UIView setAnimationDuration:1.0];
-    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
     if (isAnimation) {
         [UIView setAnimationDidStopSelector:@selector(statAniamtion)];
@@ -55,7 +54,6 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:1.0];
-    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
     if (isAnimation) {
         [UIView setAnimationDidStopSelector:@selector(animation4)];
@@ -72,7 +70,6 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDelay:0.01];
     [UIView setAnimationDuration:1.0];
-    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
     if (isAnimation) {
         [UIView setAnimationDidStopSelector:@selector(animation3)];
@@ -88,7 +85,6 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:1.0];
-    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
     if (isAnimation) {
         [UIView setAnimationDidStopSelector:@selector(animation2)];
@@ -112,7 +108,7 @@
     
     if (size < 0.75){
         scaleView.transform = CGAffineTransformMakeScale(0.25 + size, 0.25 + size);
-        [self performSelector:@selector(growMomo) withObject:nil afterDelay:INTERVAL];
+        [self performSelector:@selector(growMomo) withObject:nil afterDelay:INTERVAL*1];
     }
     else {
         scaleView.transform = CGAffineTransformMakeScale(1.0, 1.0);
@@ -130,13 +126,14 @@
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     
     NSString *imgName;
-    if ([[status objectForKey:@"injury_level"] intValue] > 0 || [[status objectForKey:@"dirty_level"] intValue] > 0) {
+    if ([[status objectForKey:@"injury_zero"] boolValue]==YES && [[status objectForKey:@"dirty_zero"] boolValue]==YES) {
+        imgName = [NSString stringWithFormat:@"momo%d-3.png",[[status objectForKey:@"id"] intValue]/100];
+    }
+    else if ([[status objectForKey:@"injury_level"] intValue] > 0 || [[status objectForKey:@"dirty_level"] intValue] > 0) {
         imgName = [NSString stringWithFormat:@"momo%d-2.png",[[status objectForKey:@"id"] intValue]/100];
-        //imgName = [NSString stringWithFormat:@"momo6-2.png"];
     }
     else {
         imgName = [NSString stringWithFormat:@"momo%d-1.png",[[status objectForKey:@"id"] intValue]/100];
-        //imgName = [NSString stringWithFormat:@"momo6-1.png"];
     }
     
     [button setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
@@ -182,7 +179,7 @@
     }
     
     int range = (injury_l - injury_r) * 100;
-    int random = rand()%100 + 1;
+    int random = arc4random()%100 + 1;
     
     if (range>100) {
         range = 100;
@@ -194,10 +191,11 @@
             [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
         }*/
         [saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
+        [saveData setHeaven:index :NO :NO];
         [self setStateEffect];
     }
     
-    [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*10];
+    [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*60];
 }
 
 - (void)calucDirtyState
@@ -220,7 +218,7 @@
     }
     
     int range = (dirty_l - dirty_r) * 100;
-    int random = rand()%100 + 1;
+    int random = arc4random()%100 + 1;
     
     if (range>100) {
         range = 100;
@@ -232,20 +230,16 @@
             [NSThread detachNewThreadSelector:@selector(setStateEffect) toTarget:self withObject:nil];
         }*/
         [saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
+        [saveData setHeaven:index :NO :NO];
         [self setStateEffect];
     }
     
-    [self performSelector:@selector(calucDirtyState) withObject:nil afterDelay:DIRTY_INTERVAL*10];
+    [self performSelector:@selector(calucDirtyState) withObject:nil afterDelay:DIRTY_INTERVAL*60];
 }
 
 - (void)stopPerformSelector
 {
-     //NSLog(@"in stopPerformSelectorop");
-      
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    
-    //[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(calucDirtyState) object:nil];
-    //[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(calucInjuryState) object:nil];
 }
 
 /*
