@@ -11,117 +11,199 @@
 
 @implementation ShipmentView
 
-
-- (id)initWithDelegate:(id)_delegate
+- (id)initWithDelegate:(id)_delegate:(int)_index
 {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
     
     if (self) {
         cb = [CustomButton initWithDelegate:self];
-        
+        saveData = [SaveData initSaveData];
         delegate =_delegate;
+        index = _index;
 
+        isAnimation = YES;
+        
         UIImageView *bgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"breedtree.png"]];
         bgImg.frame = CGRectMake(0, 0, 320, 480);
         [self addSubview:bgImg];
+
+        beltImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"belt.png"]];
+        beltImg.frame = CGRectMake(-20, 294, 340, 50);
+        beltPoint = beltImg.center;
+        [self addSubview:beltImg];
+        [self beltAnimation];
         
-        UIButton *rmButton = [cb makeButton:CGRectMake(0, 0, 50, 50) :@selector(callRemoveShipmentView) :100 :nil];
-        rmButton.backgroundColor = [UIColor redColor];
-        [self addSubview:rmButton];
+        moveStage = [[UIView alloc] initWithFrame:CGRectMake(-150, 250, 150, 75)];
+        [self addSubview:moveStage];
         
-        momoImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo_shade.png"]];
-        momoImg.frame = CGRectMake(0, 0, 125, 100);
-        momoImg.center = CGPointMake(160, 100);
-        [self addSubview:momoImg];
+        UIImageView *bb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"box_back.png"]];
+        bb.frame = CGRectMake(0, 0, 150, 75);
+        [moveStage addSubview:bb];
         
-        boxIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"momo_shade.png"]];
-        boxIV.frame = CGRectMake(0, 0, 125, 100);
-        boxIV.center = CGPointMake(-100,300);
-        [self addSubview:boxIV];
+        NSDictionary *status = [[saveData statusArray] objectAtIndex:index];
+        UIGraphicsBeginImageContext(CGSizeMake(400, 400));
+        if(0<[[status objectForKey:@"injury_level"] intValue] || 0<[[status objectForKey:@"dirty_level"] intValue]) {
+            [[UIImage imageNamed:[NSString stringWithFormat:@"momo%d-2.png",[[status objectForKey:@"id"] intValue]/100]] drawInRect:CGRectMake(0, 0, 400, 400)];
+        }
+        else {
+            [[UIImage imageNamed:[NSString stringWithFormat:@"momo%d-1.png",[[status objectForKey:@"id"] intValue]/100]] drawInRect:CGRectMake(0, 0, 400, 400)];
+        }
+        for (int i=1; i<=[[status objectForKey:@"dirty_level"] integerValue]; i++) {
+            [[UIImage imageNamed:[NSString stringWithFormat:@"dirty%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
+        }
+        for (int i=1; i<=[[status objectForKey:@"injury_level"] integerValue]; i++) {
+            [[UIImage imageNamed:[NSString stringWithFormat:@"bug%d.png",i]] drawInRect:CGRectMake(0, 0, 400, 400)];
+        }
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        momoImg = [[UIImageView alloc] initWithImage:img];
+        momoImg.frame = CGRectMake(0, 0, 150, 150);
+        momoImg.center = CGPointMake(158, -600);
+        momoPoint = CGPointMake(75, 20);
+        [moveStage addSubview:momoImg];
         
-        //最後消す
-        displayLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 270, 30)];
-        displayLabel.backgroundColor = [UIColor whiteColor];
-        displayLabel.text=@"coordinate";
-        [self addSubview:displayLabel];
-        
-        isAnimation = YES;
-        [self animation];
+        UIImageView *bf = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"box_front.png"]];
+        bf.frame = CGRectMake(0, 0, 150, 75);
+        [moveStage addSubview:bf];
     }
     
     return self;
 }
 
+- (void)startShipment
+{
+    [saveData addCollection:index];
+    [saveData setNewMomo:index];
+    
+    [self boxGoToCenter];
+    [self fallAnimation];
+}
 
-- (void)animation{
-    boxIV.center = CGPointMake(-100,300);
+- (void)beltAnimation
+{
+    beltImg.center = beltPoint;
     
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDuration:0.25];
     [UIView setAnimationDelegate:self];
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(beltAnimation)];
+    }
     
-    if (isAnimation == YES)
-        [UIView setAnimationDidStopSelector:@selector(animation)];
-        
-    boxIV.center = CGPointMake(420,300);
+    beltImg.center = CGPointMake(beltPoint.x+20, beltPoint.y);
+    
     [UIView commitAnimations];
 }
 
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)boxGoOut
 {
-    [self fallAnimation];
-    CALayer *boxLayer = [boxIV.layer presentationLayer];
-    if(140<boxLayer.position.x&&boxLayer.position.x<180){
-        displayLabel.text = [NSString stringWithFormat:@"OK"];
-        
-        }else{
-        displayLabel.text = [NSString stringWithFormat:@"OUT"];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDuration:2.9375];
+    [UIView setAnimationDelegate:self];
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(endAniamtion)];
     }
+    
+    moveStage.center = CGPointMake(moveStage.center.x+235, moveStage.center.y);
+    
+    [UIView commitAnimations];
+}
+
+- (void)endAniamtion
+{
+    [self performSelector:@selector(callRemoveShipmentView) withObject:nil afterDelay:2.0];
+}
+
+- (void)boxGoToCenter
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDelay:1.0];
+    [UIView setAnimationDuration:2.9375];
+    [UIView setAnimationDelegate:self];
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(boxGoOut)];
+    }
+    
+    moveStage.center = CGPointMake(moveStage.center.x+235, moveStage.center.y);
+    
+    [UIView commitAnimations];
+}
+
+-(void)bound4
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:0.1];
+    [UIView setAnimationDelegate:self];
+    
+    momoImg.center = CGPointMake(momoImg.center.x, momoImg.center.y+15);
+    
+    [UIView commitAnimations];
+}
+
+-(void)bound3
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDuration:0.1];
+    [UIView setAnimationDelegate:self];
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(bound4)];
+    }
+    
+    momoImg.center = CGPointMake(momoImg.center.x, momoImg.center.y-15);
+    
+    [UIView commitAnimations];
+}
+
+-(void)bound2
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDelegate:self];
+    if (isAnimation) {
+     [UIView setAnimationDidStopSelector:@selector(bound3)];
+    }
+    
+    momoImg.center = CGPointMake(momoImg.center.x, momoImg.center.y+30);
+    
+    [UIView commitAnimations];
+}
+
+-(void)bound1
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDelegate:self];
+    if (isAnimation) {
+     [UIView setAnimationDidStopSelector:@selector(bound2)];
+    }
+    
+    momoImg.center = CGPointMake(momoImg.center.x, momoImg.center.y-30);
+    
+    [UIView commitAnimations];
 }
 
 - (void)fallAnimation
 {
-    momoImg.center = CGPointMake(160,100);
-    
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.6];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        
-    momoImg.center = CGPointMake(160,300);
+    [UIView setAnimationDelay:2.9];
+    [UIView setAnimationDuration:1.0375];
+    [UIView setAnimationDelegate:self];
+    if (isAnimation) {
+        [UIView setAnimationDidStopSelector:@selector(bound1)];
+    }
+    
+    momoImg.center = momoPoint;
     
     [UIView commitAnimations];
 }
-
-- (void)resultView:(BOOL)flag
-{
-    if(flag)
-        NSLog(@"a");
-    else
-        NSLog(@"b");
-    
-    resultView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    resultView.backgroundColor = [UIColor whiteColor];
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0,0 , 100, 50)];
-    [label setText:[NSString stringWithFormat:@"success"]];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(160,240,100, 50)];
-    btn.backgroundColor = [UIColor blackColor];
-    [btn addTarget:self action:@selector(removeSuccessView) forControlEvents:UIControlEventTouchDown];
-    
-    [resultView addSubview:label];
-    [resultView addSubview:btn];
-    [self addSubview:resultView];
-}
-
-
-- (void)removeResultView{
-    if(resultView){
-        [resultView removeFromSuperview];
-    }
-}
-
 
 -(void)callRemoveShipmentView
 {
