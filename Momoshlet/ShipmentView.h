@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
+#import "SaveData.h"
 
 @protocol ShipmentViewDelegate;
 
@@ -15,16 +16,21 @@
     CustomButton *cb;
     id<ShipmentViewDelegate> delegate;
     
+    SaveData *saveData;
     UIImageView *momoImg;
-    UIImageView *boxIV;
-    UILabel *displayLabel;
-    UIView *resultView;
+    CGPoint momoPoint;
+    
+    UIView *moveStage;
+    
+    UIImageView *beltImg;
+    CGPoint beltPoint;
+    
+    int index;
     BOOL isAnimation;
 }
 
-- (id)initWithDelegate:(id)_delegate;
-//- (void)animation;
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (id)initWithDelegate:(id)_delegate:(int)_index;
+- (void)startShipment;
 
 @end
 
