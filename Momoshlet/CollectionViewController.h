@@ -8,13 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
+#import "SaveData.h"
 
 @interface CollectionViewController : UIViewController <UIScrollViewDelegate>{
     CustomButton *cb;
+    SaveData *saveData;
     UIView *detail;
     UILabel *pageLagel;
+    UIView *stage;
     int page;
+    int pages;
     float scrollXPoint;
 }
+
+- (void)makeScrollView;
 
 @end
