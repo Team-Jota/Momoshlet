@@ -9,6 +9,9 @@
 #import "MainViewController.h"
 #import "AppDelegate.h"
 
+#define INTERVAL_DIRTY 3
+#define INTERVAL_INJURY 5
+
 @interface MainViewController ()
 
 @end
@@ -62,9 +65,6 @@
     
     isAnimation = YES;
     [self backAnimation];
-    //self.view.backgroundColor = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
-    
-    NSLog(@"%@",self.tabBarItem.title);
 }
 
 - (void)viewDidUnload
@@ -94,17 +94,10 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app tabBatItemCollectionEnabled:YES];
     [app tabBatItemMainEnabled:YES];
-    
-    //NSLog(@"mainview dirty_level = %d",[[[saveData.statusArray objectAtIndex:3] objectForKey:@"dirty_level"] intValue]);
 }
 
 - (void)setMomoButton
-{
-    /*if (momoView) {
-        [momoView removeFromSuperview];
-        momoView = nil;
-    }*/
-    
+{    
     momoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     momoView.backgroundColor = [UIColor clearColor];
     
@@ -115,8 +108,8 @@
         
         MomoAnimationView *momoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
         [momoBtn growMomo];
-        [momoBtn calucDirtyState];
-        [momoBtn calucInjuryState];
+        [momoBtn performSelector:@selector(calucDirtyState) withObject:nil afterDelay:INTERVAL_DIRTY*60];
+        [momoBtn performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INTERVAL_INJURY*60];
         [momoBtn setStateEffect];
         [momoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5*i];
         momoBtn.center = point[i];
@@ -128,9 +121,7 @@
 }
 
 - (void)resetMomoButton:(int)index
-{
-    NSLog(@"reset index = %d",index);
-    
+{    
     MomoAnimationView *momoBtn = (MomoAnimationView *)[momoView viewWithTag:(index+1)*100];
     [momoBtn stopPerformSelector];
     [momoBtn removeFromSuperview];
@@ -141,10 +132,10 @@
         
     MomoAnimationView *newMomoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
     [newMomoBtn growMomo];
-    [newMomoBtn calucDirtyState];
-    [newMomoBtn calucInjuryState];
+    [newMomoBtn performSelector:@selector(calucDirtyState) withObject:nil afterDelay:INTERVAL_DIRTY*60];
+    [newMomoBtn performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INTERVAL_INJURY*60];
     [newMomoBtn setStateEffect];
-    [newMomoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5*index];
+    [newMomoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5];
     newMomoBtn.center = point[index];
     
     [momoView addSubview:newMomoBtn];
@@ -156,9 +147,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"kk"];
     int now_h = [[formatter stringFromDate:now] intValue];
- 
-    NSLog(@"hour = %d",now_h);
-    
+
     UIColor *color;
     if (now_h >= 7 && now_h <=16) {
         color = [UIColor colorWithRed:0.690 green:0.886 blue:1.000 alpha:1.0];
@@ -188,7 +177,6 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     [UIView setAnimationDuration:30.0];
-    //[UIView setAnimationsEnabled:isAnimation];
     [UIView setAnimationDelegate:self];
     if (isAnimation) {
         [UIView setAnimationDidStopSelector:@selector(backAnimation)];
