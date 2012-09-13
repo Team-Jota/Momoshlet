@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
 #import "SaveData.h"
+#import <AVFoundation/AVFoundation.h>
 
 @protocol CatchBugViewDelegate;
 
@@ -35,11 +36,15 @@
     UIImageView *momoImg2;
     
     int selectedInjury;
+    int injury_level;
     
     BOOL isMoveMist;
+    
+    AVAudioPlayer *sprayAudio;
 }
 
 -(id)initWithDelegate:(id)_delegate:(int)_index;
+- (void)startCatchBug;
 
 @end
 
