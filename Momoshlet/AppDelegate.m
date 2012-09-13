@@ -13,6 +13,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    hasChangedCollection = NO;
+    
     return YES;
 }
 							
@@ -61,6 +63,16 @@
 - (void)tabBatItemCollectionEnabled:(BOOL)enabled
 {
     collection.enabled = enabled;
+}
+
+- (void)setHasChangedCollection:(BOOL)flag
+{
+    hasChangedCollection = flag;
+}
+
+- (BOOL)getHasChangedCollection
+{
+    return  hasChangedCollection;
 }
 
 @end
