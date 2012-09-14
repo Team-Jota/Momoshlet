@@ -159,6 +159,59 @@
     //}
 }
 
+- (void)setInjury
+{
+    NSLog(@"call setInjury");
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"injury_updated_time"]];
+    int count = since / (60 * INJURY_INTERVAL);
+    
+    BOOL isUpdated = NO;
+    if ([[status objectForKey:@"injury_level"] intValue] < 5) {
+        for (int i =0; i<count; i++) {
+            float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"created_at"]];
+            float finishTime = [[status objectForKey:@"hours"] floatValue]*60*60;
+            float size = (since * 0.75) / finishTime;
+            
+            double dirty_l;
+            double dirty_r;
+            
+            if (size < 1.0) {
+                dirty_l = (double)(72 - ([[status objectForKey:@"injury_resistance"] intValue] * 12)) / 72;
+                dirty_r = (double)[[status objectForKey:@"injury_resistance"] intValue] / 8;
+            }
+            else {
+                dirty_l = (double)(72 - ([[status objectForKey:@"injury_resistance"] intValue] * 12)) / 72;
+                dirty_r = (double)[[status objectForKey:@"injury_resistance"] intValue] / 8;
+            }
+            
+            int range = (dirty_l - dirty_r) * 100;
+            int random = arc4random()%100 + 1;
+            
+            if (range>100) {
+                range = 100;
+            }
+            
+            if (random <= range && [[status objectForKey:@"injury_level"] intValue] < 5) {
+                [saveData countUpInjuryLevel:[NSNumber numberWithInt:index]];
+                [saveData setHeaven:index :NO :NO];
+                isUpdated = YES;
+            }
+            
+            if ([[status objectForKey:@"injury_level"] intValue] >= 5) {
+                break;
+            }
+        }
+        
+        if (isUpdated == YES) {
+            [saveData updateInjury:index];
+            [self setStateEffect];
+        }
+        
+        [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*60];
+    }
+}
+
 - (void)calucInjuryState
 {
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
@@ -196,6 +249,59 @@
     }
     
     [self performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INJURY_INTERVAL*60];
+}
+
+- (void)setDirty
+{
+    NSLog(@"call setDirty");
+    NSDictionary *status = [saveData.statusArray objectAtIndex:index];
+    float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"dirty_updated_time"]];
+    int count = since / (60 * DIRTY_INTERVAL);
+    
+    BOOL isUpdated = NO;
+    if ([[status objectForKey:@"dirty_level"] intValue] < 5) {
+        for (int i =0; i<count; i++) {
+            float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"created_at"]];
+            float finishTime = [[status objectForKey:@"hours"] floatValue]*60*60;
+            float size = (since * 0.75) / finishTime;
+        
+            double dirty_l;
+            double dirty_r;
+        
+            if (size < 1.0) {
+                dirty_l = (double)(72 - ([[status objectForKey:@"dirty_resistance"] intValue] * 12)) / 72;
+                dirty_r = (double)[[status objectForKey:@"dirty_resistance"] intValue] / 8;
+            }
+            else {
+                dirty_l = (double)(72 - ([[status objectForKey:@"dirty_resistance"] intValue] * 12)) / 72;
+                dirty_r = (double)[[status objectForKey:@"dirty_resistance"] intValue] / 8;
+            }
+        
+            int range = (dirty_l - dirty_r) * 100;
+            int random = arc4random()%100 + 1;
+        
+            if (range>100) {
+                range = 100;
+            }
+        
+            if (random <= range && [[status objectForKey:@"dirty_level"] intValue] < 5) {
+                [saveData countUpDirtyLevel:[NSNumber numberWithInt:index]];
+                [saveData setHeaven:index :NO :NO];
+                isUpdated = YES;
+            }
+            
+            if ([[status objectForKey:@"dirty_level"] intValue] >= 5) {
+                break;
+            }
+        }
+    
+        if (isUpdated == YES) {
+            [saveData updateDirty:index];
+            [self setStateEffect];
+        }
+        
+        [self performSelector:@selector(calucDirtyState) withObject:nil afterDelay:DIRTY_INTERVAL*60];
+    }
 }
 
 - (void)calucDirtyState
