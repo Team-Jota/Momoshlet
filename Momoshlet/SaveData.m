@@ -12,12 +12,14 @@
 #define COLLECTION 0
 #define STATUS 1
 #define MONEY 2
+#define TUTORIAL 3
 
 @implementation SaveData
 
 @synthesize collectionArray;
 @synthesize statusArray;
 @synthesize money;
+@synthesize tutorial;
 
 SaveData *saveData = nil;
 
@@ -37,11 +39,14 @@ SaveData *saveData = nil;
     if (status==COLLECTION) {
         [nud setObject:collectionArray forKey:@"collection"];
     }
-    else if (status==STATUS){
+    else if (status==STATUS) {
         [nud setObject:statusArray forKey:@"status"];
     }
-    else if (status==MONEY){
+    else if (status==MONEY) {
         [nud setObject:[NSNumber numberWithInt:money] forKey:@"money"];
+    }
+    else if (status==TUTORIAL) {
+        [nud setObject:[NSNumber numberWithBool:tutorial] forKey:@"tutorial"];
     }
     
     [nud synchronize];
@@ -88,6 +93,8 @@ SaveData *saveData = nil;
             [dic setValue:[NSNumber numberWithInt:2] forKey:@"dirty_level"];//5段階
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"injury_resistance"];//5段階
             [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_resistance"];//5段階
+            [dic setValue:[NSDate date] forKey:@"dirty_updated_time"];
+            [dic setValue:[NSDate date] forKey:@"injury_updated_time"];
             [dic setValue:[NSNumber numberWithBool:NO] forKey:@"dirty_zero"];
             [dic setValue:[NSNumber numberWithBool:NO] forKey:@"injury_zero"];
             
@@ -95,6 +102,15 @@ SaveData *saveData = nil;
         }
         
         [self saveSaveData:STATUS];
+    }
+    
+    if ([nud objectForKey:@"tutorial"]!=NULL) {
+        tutorial = [[nud objectForKey:@"tutorial"] boolValue];
+    }
+    else {
+        tutorial = YES;
+        
+        [self saveSaveData:TUTORIAL];
     }
 }
 
@@ -141,6 +157,8 @@ SaveData *saveData = nil;
     [dic setValue:[NSNumber numberWithInt:0] forKey:@"dirty_level"];//5段階
     [dic setValue:[NSNumber numberWithInt:injury_resistance] forKey:@"injury_resistance"];//5段階
     [dic setValue:[NSNumber numberWithInt:dirty_resistance] forKey:@"dirty_resistance"];//5段階
+    [dic setValue:[NSDate date] forKey:@"dirty_updated_time"];
+    [dic setValue:[NSDate date] forKey:@"injury_updated_time"];
     [dic setValue:[NSNumber numberWithBool:NO] forKey:@"dirty_zero"];
     [dic setValue:[NSNumber numberWithBool:NO] forKey:@"injury_zero"];
     
@@ -257,6 +275,31 @@ SaveData *saveData = nil;
         [collectionArray replaceObjectAtIndex:c_index withObject:[NSNumber numberWithBool:isCollection]];
         [self saveSaveData:COLLECTION];
     }
+}
+
+- (void)updateInjury:(int)_index
+{
+    NSDictionary *dic = [statusArray objectAtIndex:_index];
+    [dic setValue:[NSDate date] forKey:@"injury_updated_time"];
+    [statusArray replaceObjectAtIndex:_index withObject:dic];
+    
+    [self saveSaveData:STATUS];
+}
+
+- (void)updateDirty:(int)_index
+{
+    NSDictionary *dic = [statusArray objectAtIndex:_index];
+    [dic setValue:[NSDate date] forKey:@"dirty_updated_time"];
+    [statusArray replaceObjectAtIndex:_index withObject:dic];
+    
+    [self saveSaveData:STATUS];
+}
+
+- (void)tutorialOff
+{
+    tutorial = NO;
+    
+    [self saveSaveData:TUTORIAL];
 }
 
 @end
