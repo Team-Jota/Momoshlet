@@ -42,15 +42,14 @@
     cb = [CustomButton initWithDelegate:self];
     
     detail = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    detail.backgroundColor = [UIColor purpleColor];
     
     int number = (btn.tag/10)-1;
     int momo_id = number/5;
     int state = number%5;
     
-    /*UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    [label setText:[NSString stringWithFormat:@"%d",btn.tag]];
-    [detail addSubview:label];*/
+    UIImageView *bgimg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bgcollection2.png"]];
+    bgimg.frame = CGRectMake(0, 0, 320, 480);
+    [detail addSubview:bgimg];
     
     NSLog(@"momo_id = %d, state = %d", momo_id, state);
     
