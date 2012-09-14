@@ -22,9 +22,12 @@
     BOOL isAnimation;
     CGPoint backImgPoint;
     CGPoint point[6];
+    
+    UIImageView *tutorial;
 }
 
 - (void)removeBreedView;
 - (void)resetMomoButton:(int)index;
+- (void)recallMomoState;
 
 @end
