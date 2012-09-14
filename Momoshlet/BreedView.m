@@ -31,6 +31,11 @@
         bgImg.frame = CGRectMake(0, 0, 320, 480);
         [self addSubview:bgImg];
         
+        breedLevel = [[UILabel alloc] initWithFrame:CGRectMake(220, 0, 100, 50)];
+        breedLevel.backgroundColor = [UIColor clearColor];
+        breedLevel.font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:30];
+        breedLevel.textColor = [UIColor whiteColor];
+        [self addSubview:breedLevel];
         
         //ShipmentButton
         shipmentBtn = [cb makeButton:CGRectMake(100, 275, 50, 50) :@selector(shipmentView:) :1000 :[NSString stringWithFormat:@"button2.png"]];
@@ -40,19 +45,34 @@
         
         //WashetButton
         washletBtn = [cb makeButton:CGRectMake(100, 335, 50, 50) :@selector(washletView:) :3000 :[NSString stringWithFormat:@"button3.png"]];
+        rmButton = [cb makeButton:CGRectMake(25, 275, 50, 50) :@selector(callRemoveBreedView) :100 :@"button4.png"];
         
         [self updateStatus];
         
-        UIButton *rmButton = [cb makeButton:CGRectMake(25, 275, 50, 50) :@selector(callRemoveBreedView) :100 :@"button4.png"];
-        [self addSubview:rmButton];
+        if (saveData.tutorial == YES) {
+            rmButton.enabled = NO;
+            shipmentBtn.enabled = NO;
+            washletBtn.enabled = NO;
+        }
         
         [self addSubview:shipmentBtn];
         [self addSubview:catchBugBtn];
         [self addSubview:washletBtn];
+        [self addSubview:rmButton];
     }
     
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app tabBatItemCollectionEnabled:NO];
+    
+    if (saveData.tutorial == YES) {
+        tutorial = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tutorial2.png"]];
+        tutorial.frame = CGRectMake(0, 0, 320, 480);
+        tutorial.userInteractionEnabled = NO;
+        [self addSubview:tutorial];
+    }
+    else {
+        tutorial = nil;
+    }
     
     return self;
 }
@@ -137,6 +157,12 @@
     effectView.frame = CGRectMake(0, 0, 250, 250);
     
     [momoIV addSubview:effectView];
+    
+    if (size > 1.0) {
+        size = 1.0;
+    }
+    
+    [breedLevel setText:[NSString stringWithFormat:@"%d％",(int)(size*100)]];
 }
 
 
@@ -169,6 +195,15 @@
         [delegate resetMomoButton:index];
         [self callRemoveBreedView];
     }
+    
+    if (saveData.tutorial==YES) {
+        if (tutorial) {
+            [tutorial removeFromSuperview];
+            tutorial = nil;
+        }
+        
+        rmButton.enabled = YES;
+    }
 }
 
 - (void)removeCatchBugView{
@@ -178,6 +213,16 @@
         [catchBug removeFromSuperview];
         catchBug = nil;
     }
+    
+    if (saveData.tutorial==YES) {
+        if (tutorial) {
+            [tutorial removeFromSuperview];
+            [self insertSubview:tutorial aboveSubview:momoIV];
+        }
+        washletBtn.enabled = YES;
+        
+        tutorial.image = [UIImage imageNamed:@"tutorial3.png"];
+    }
 }
 
 - (void)removeWashletView{
@@ -186,6 +231,17 @@
         [delegate resetMomoButton:index];
         [washlet removeFromSuperview];
         washlet = nil;
+    }
+    
+    if (saveData.tutorial==YES) {
+        if (tutorial) {
+            [tutorial removeFromSuperview];
+            [self insertSubview:tutorial aboveSubview:momoIV];
+        }
+        
+        tutorial.image = [UIImage imageNamed:@"tutorial4.png"];
+        
+        rmButton.enabled = YES;
     }
 }
 
