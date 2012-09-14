@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     UITabBarItem *main;
     UITabBarItem *collection;
     BOOL hasChangedCollection;
+    MainViewController *mvc;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -22,5 +24,6 @@
 - (void)tabBatItemCollectionEnabled:(BOOL)enabled;
 - (void)setHasChangedCollection:(BOOL)flag;
 - (BOOL)getHasChangedCollection;
+- (void)setMVC:(MainViewController *)_mvc;
 
 @end
