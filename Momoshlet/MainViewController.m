@@ -65,6 +65,19 @@
     
     isAnimation = YES;
     [self backAnimation];
+    
+    if (saveData.tutorial == YES) {
+        tutorial = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tutorial1.png"]];
+        tutorial.frame = CGRectMake(0, 0, 320, 480);
+        tutorial.userInteractionEnabled = NO;
+        [self.view addSubview:tutorial];
+    }
+    else {
+        tutorial = nil;
+    }
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app setMVC:self];
 }
 
 - (void)viewDidUnload
@@ -91,6 +104,15 @@
         breed = nil;
     }
     
+    if (tutorial) {
+        [tutorial removeFromSuperview];
+        tutorial = nil;
+    }
+    
+    if (saveData.tutorial == YES) {
+        [saveData tutorialOff];
+    }
+    
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app tabBatItemCollectionEnabled:YES];
     [app tabBatItemMainEnabled:YES];
@@ -107,9 +129,12 @@
         UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(i+1) :nil];
         
         MomoAnimationView *momoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
+        momoBtn.tag = 100*(i+1);
         [momoBtn growMomo];
-        [momoBtn performSelector:@selector(calucDirtyState) withObject:nil afterDelay:INTERVAL_DIRTY*60];
-        [momoBtn performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INTERVAL_INJURY*60];
+        //[momoBtn performSelector:@selector(calucDirtyState) withObject:nil afterDelay:INTERVAL_DIRTY*60];
+        //[momoBtn performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INTERVAL_INJURY*60];
+        [momoBtn setDirty];
+        [momoBtn setInjury];
         [momoBtn setStateEffect];
         [momoBtn performSelector:@selector(statAniamtion) withObject:nil afterDelay:0.5*i];
         momoBtn.center = point[i];
@@ -123,6 +148,7 @@
 - (void)resetMomoButton:(int)index
 {    
     MomoAnimationView *momoBtn = (MomoAnimationView *)[momoView viewWithTag:(index+1)*100];
+    [momoBtn stopAniamtion];
     [momoBtn stopPerformSelector];
     [momoBtn removeFromSuperview];
     momoBtn = nil;
@@ -131,6 +157,7 @@
     UIButton *btn = [cb makeButton:CGRectMake(0, 0, 100, 100) :@selector(breedView:) :10*(index+1) :nil];
         
     MomoAnimationView *newMomoBtn = [[MomoAnimationView alloc] initWithMomoButton:btn];
+    momoBtn.tag = 100*(index+1);
     [newMomoBtn growMomo];
     [newMomoBtn performSelector:@selector(calucDirtyState) withObject:nil afterDelay:INTERVAL_DIRTY*60];
     [newMomoBtn performSelector:@selector(calucInjuryState) withObject:nil afterDelay:INTERVAL_INJURY*60];
@@ -185,6 +212,17 @@
     backImg.center = CGPointMake(backImgPoint.x - 160, backImgPoint.y);
     
     [UIView commitAnimations];
+}
+
+- (void)recallMomoState
+{
+    for (int i=0; i<6; i++) {
+        MomoAnimationView *momoBtn = (MomoAnimationView *)[momoView viewWithTag:(i+1)*100];
+        [momoBtn stopPerformSelector];
+        [momoBtn growMomo];
+        [momoBtn setDirty];
+        [momoBtn setInjury];
+    }
 }
 
 @end
