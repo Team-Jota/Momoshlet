@@ -29,6 +29,10 @@
     UIButton *shipmentBtn;
     UIButton *washletBtn;
     UIButton *catchBugBtn;
+    UIButton *rmButton;
+    
+    UIImageView *tutorial;
+    UILabel *breedLevel;
 }
 
 - (id)initWithDelegate:(id)_delegate:(int)_index;
