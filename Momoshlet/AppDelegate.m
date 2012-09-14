@@ -33,6 +33,14 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    /*NSLog(@"%@",application.keyWindow.rootViewController);
+    
+    NSString *viewIdentifier = @"MainViewController";
+    UIStoryboard *sb = application.keyWindow.rootViewController.storyboard;
+    MainViewController *mvc = [sb instantiateViewControllerWithIdentifier:viewIdentifier];
+    [mvc recallMomoState];*/
+    [mvc recallMomoState];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -73,6 +81,11 @@
 - (BOOL)getHasChangedCollection
 {
     return  hasChangedCollection;
+}
+
+- (void)setMVC:(MainViewController *)_mvc
+{
+    mvc = _mvc;
 }
 
 @end
