@@ -161,7 +161,7 @@
 
 - (void)setInjury
 {
-    NSLog(@"call setInjury");
+    //NSLog(@"call setInjury");
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"injury_updated_time"]];
     int count = since / (60 * INJURY_INTERVAL);
@@ -253,7 +253,7 @@
 
 - (void)setDirty
 {
-    NSLog(@"call setDirty");
+    //NSLog(@"call setDirty");
     NSDictionary *status = [saveData.statusArray objectAtIndex:index];
     float since = [[NSDate date] timeIntervalSinceDate:[status objectForKey:@"dirty_updated_time"]];
     int count = since / (60 * DIRTY_INTERVAL);
