@@ -223,6 +223,9 @@
         [momoBtn setDirty];
         [momoBtn setInjury];
     }
+    
+    [self setBack];
+    [self backAnimation];
 }
 
 @end
